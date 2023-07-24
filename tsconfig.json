@@ -1,0 +1,28 @@
+{
+	"$schema": "https://json.schemastore.org/tsconfig",
+	"display": "fastify-api-boilerplate",
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "dist", "logs"],
+	"compilerOptions": {
+		"lib": ["ESNext"],
+		"allowJs": false,
+		"skipLibCheck": true,
+		"strict": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"noUncheckedIndexedAccess": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"verbatimModuleSyntax": true,
+		"forceConsistentCasingInFileNames": true,
+		"incremental": true,
+		"esModuleInterop": true,
+		"module": "ESNext",
+		"moduleResolution": "NodeNext",
+		"resolveJsonModule": true,
+		"jsx": "preserve",
+		"isolatedModules": true,
+		"outDir": "dist"
+	}
+}
