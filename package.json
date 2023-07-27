@@ -4,9 +4,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"format": "prettier src/**/*.{ts} --write",
+		"format": "prettier src/**/*.ts --write",
 		"lint": "eslint src --ext ts --report-unused-disable-directives --max-warnings 0",
-		"dev": "tsnd --watch -r ts-node/register src/",
+		"dev": "tsx watch src/",
 		"test": "tsnd bin/test.ts",
 		"build": "tsc -p tsconfig.json",
 		"start": "node dist/index.js"
@@ -30,7 +30,7 @@
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-unicorn": "^48.0.0",
 		"prettier": "^3.0.0",
-		"ts-node-dev": "^2.0.0",
+		"tsx": "^3.12.7",
 		"typescript": "^5.1.6"
 	}
 }
