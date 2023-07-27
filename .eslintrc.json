@@ -17,6 +17,7 @@
 		"project": ["./tsconfig.json"],
 		"sourceType": "module"
 	},
+	"ignorePatterns": ["bin"],
 	"plugins": ["@typescript-eslint", "unicorn"],
 	"rules": {
 		"constructor-super": "error",

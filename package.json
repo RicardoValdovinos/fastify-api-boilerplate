@@ -7,9 +7,9 @@
 		"format": "prettier src/**/*.{ts} --write",
 		"lint": "eslint src --ext ts --report-unused-disable-directives --max-warnings 0",
 		"dev": "tsnd --watch -r ts-node/register src/",
-		"test": "node --loader=ts-node/esm bin/test.ts",
+		"test": "tsnd bin/test.ts",
 		"build": "tsc -p tsconfig.json",
-		"start": "node index.js"
+		"start": "node dist/index.js"
 	},
 	"keywords": [],
 	"author": "",
