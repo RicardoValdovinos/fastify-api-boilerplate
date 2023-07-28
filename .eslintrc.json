@@ -51,10 +51,10 @@
 		"no-return-await": "off",
 		"@typescript-eslint/return-await": "error",
 		"unicorn/custom-error-definition": "error",
-		"unicorn/empty-brace-spaces": "warning",
+		"unicorn/empty-brace-spaces": 1,
 		"unicorn/no-array-for-each": "off",
 		"unicorn/no-array-reduce": "off",
-		"unicorn/no-console-spaces": "warning",
+		"unicorn/no-console-spaces": 1,
 		"unicorn/no-null": "off",
 		"unicorn/prevent-abbreviations": [
 			"error",
