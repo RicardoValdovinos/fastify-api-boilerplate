@@ -6,7 +6,7 @@
 	"extends": [
 		"eslint:recommended",
 		"plugin:@typescript-eslint/recommended",
-		"plugin:@typescript-eslint/recommended-requiring-type-checking",
+		"plugin:@typescript-eslint/recommended-type-checked",
 		"plugin:unicorn/recommended",
 		"prettier"
 	],
@@ -55,6 +55,17 @@
 		"unicorn/no-array-for-each": "off",
 		"unicorn/no-array-reduce": "off",
 		"unicorn/no-console-spaces": "warning",
-		"unicorn/no-null": "off"
+		"unicorn/no-null": "off",
+		"unicorn/prevent-abbreviations": [
+			"error",
+			{
+				"replacements": {
+					"arg": false,
+					"args": false,
+					"env": false
+				},
+				"ignore": ["semVer", "SemVer"]
+			}
+		]
 	}
 }
