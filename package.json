@@ -12,13 +12,25 @@
 		"test": "ts-node test/index.ts",
 		"build": "tsc -p tsconfig.json",
 		"start": "node dist/index.js",
+		"clean": "rm -rf dist",
 		"commitizen": "exec < /dev/tty && git cz --hook || true",
 		"commitlint": "commitlint --edit"
 	},
 	"keywords": [],
 	"author": "",
-	"license": "ISC",
+	"license": "MIT",
 	"dependencies": {
+		"@fastify/autoload": "^5.7.1",
+		"@fastify/caching": "^8.3.0",
+		"@fastify/cookie": "^9.0.4",
+		"@fastify/csrf-protection": "^6.3.0",
+		"@fastify/env": "^4.2.0",
+		"@fastify/helmet": "^11.0.0",
+		"@fastify/multipart": "^7.7.3",
+		"@fastify/rate-limit": "^8.0.3",
+		"@fastify/swagger": "^8.8.0",
+		"@fastify/type-provider-typebox": "^3.4.0",
+		"@sinclair/typebox": "^0.30.2",
 		"fastify": "^4.20.0"
 	},
 	"devDependencies": {
