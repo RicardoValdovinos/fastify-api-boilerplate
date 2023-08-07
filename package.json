@@ -29,10 +29,13 @@
 		"@fastify/multipart": "^7.7.3",
 		"@fastify/rate-limit": "^8.0.3",
 		"@fastify/swagger": "^8.8.0",
+		"@fastify/swagger-ui": "^1.9.3",
 		"@fastify/type-provider-typebox": "^3.4.0",
 		"@sinclair/typebox": "^0.30.2",
+		"dayjs": "^1.11.9",
 		"fastify": "^4.20.0",
-		"fastify-plugin": "^4.5.1"
+		"fastify-plugin": "^4.5.1",
+		"kysely": "^0.26.1"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.6.7",
