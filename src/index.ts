@@ -2,13 +2,11 @@ import fastify from "fastify";
 
 const server = fastify();
 
-server.get("/ping", (): string => {
-	return "pong\n";
-});
+void server.register(import("./modules/example/route"));
 
-server.listen({ port: 8080 }, (error, address) => {
+server.listen({ port: 3000 }, (error, address) => {
 	if (error) {
-		throw new Error(error.message);
+		throw new Error(`Error starting server: ${error.message}`);
 	}
 	console.log(`Server listening at ${address}`);
 });

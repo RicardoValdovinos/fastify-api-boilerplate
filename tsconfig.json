@@ -20,7 +20,7 @@
 		"incremental": true,
 		"esModuleInterop": true,
 		"module": "NodeNext",
-		"moduleResolution": "NodeNext",
+		"moduleResolution": "Node",
 		"resolveJsonModule": true,
 		"jsx": "preserve",
 		"isolatedModules": true,
