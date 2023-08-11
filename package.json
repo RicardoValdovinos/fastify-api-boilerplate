@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "setup": "git init && husky install",
     "format": "prettier src/**/*.ts --write",
@@ -10,6 +11,7 @@
     "lint:fix": "eslint src --ext ts --report-unused-disable-directives --max-warnings 0 --fix",
     "dev": "tsx src/index.ts",
     "test": "tsx test/index.ts",
+    "test:coverage": "c8 tsx test/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/index.js",
     "clean": "rm -rf dist",
