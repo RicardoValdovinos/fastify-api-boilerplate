@@ -100,6 +100,9 @@ devDependencies:
   eslint-plugin-n:
     specifier: ^16.0.1
     version: 16.0.1(eslint@8.45.0)
+  eslint-plugin-security:
+    specifier: ^1.7.1
+    version: 1.7.1
   eslint-plugin-unicorn:
     specifier: ^48.0.0
     version: 48.0.0(eslint@8.45.0)
@@ -1988,6 +1991,12 @@ packages:
       semver: 7.5.4
     dev: true
 
+  /eslint-plugin-security@1.7.1:
+    resolution: {integrity: sha512-sMStceig8AFglhhT2LqlU5r+/fn9OwsA72O5bBuQVTssPCdQAOQzL+oMn/ZcpeUY6KcNfLJArgcrsSULNjYYdQ==}
+    dependencies:
+      safe-regex: 2.1.1
+    dev: true
+
   /eslint-plugin-unicorn@48.0.0(eslint@8.45.0):
     resolution: {integrity: sha512-8fk/v3p1ro34JSVDBEmtOq6EEQRpMR0iTir79q69KnXFZ6DJyPkT3RAi+ZoTqhQMdDSpGh8BGR68ne1sP5cnAA==}
     engines: {node: '>=16'}
@@ -3729,6 +3738,12 @@ packages:
     dependencies:
       ret: 0.2.2
     dev: false
+
+  /safe-regex@2.1.1:
+    resolution: {integrity: sha512-rx+x8AMzKb5Q5lQ95Zoi6ZbJqwCLkqi3XuJXp5P3rT8OEc6sZCJG5AE5dU3lsgRr/F4Bs31jSlVN+j5KrsGu9A==}
+    dependencies:
+      regexp-tree: 0.1.27
+    dev: true
 
   /safe-stable-stringify@2.4.3:
     resolution: {integrity: sha512-e2bDA2WJT0wxseVd4lsDP4+3ONX6HpMXQa1ZhFQ7SU+GjvORCmShbCMltrtIDfkYhVHrOcPtj+KhmDBdPdZD1g==}

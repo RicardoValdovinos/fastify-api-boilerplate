@@ -9,6 +9,7 @@
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:unicorn/recommended",
     "plugin:n/recommended",
+    "plugin:security/recommended",
     "prettier"
   ],
   "overrides": [],
