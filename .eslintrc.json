@@ -1,92 +1,82 @@
 {
-  "env": {
-    "es2022": true,
-    "node": true
-  },
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:unicorn/recommended",
-    "plugin:n/recommended",
-    "plugin:security/recommended",
-    "prettier"
-  ],
-  "overrides": [],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "project": [
-      "./tsconfig.json"
-    ],
-    "sourceType": "module"
-  },
-  "ignorePatterns": [
-    "bin",
-    "test"
-  ],
-  "plugins": [
-    "@typescript-eslint",
-    "unicorn"
-  ],
-  "rules": {
-    "constructor-super": "error",
-    "for-direction": "error",
-    "no-await-in-loop": "error",
-    "no-constant-binary-expression": "error",
-    "no-duplicate-imports": "error",
-    "no-new-native-nonconstructor": "error",
-    "no-promise-executor-return": "error",
-    "no-self-compare": "error",
-    "no-template-curly-in-string": "error",
-    "no-unmodified-loop-condition": "error",
-    "no-unreachable-loop": "error",
-    "no-unused-private-class-members": "error",
-    "require-atomic-updates": "error",
-    "no-use-before-define": "error",
-    "camelcase": "error",
-    "@typescript-eslint/adjacent-overload-signatures": "error",
-    "@typescript-eslint/array-type": [
-      "error",
-      {
-        "default": "generic"
-      }
-    ],
-    "@typescript-eslint/consistent-type-exports": "error",
-    "@typescript-eslint/consistent-type-imports": "error",
-    "@typescript-eslint/explicit-function-return-type": "error",
-    "@typescript-eslint/explicit-member-accessibility": "error",
-    "@typescript-eslint/explicit-module-boundary-types": "error",
-    "@typescript-eslint/no-import-type-side-effects": "error",
-    "@typescript-eslint/no-require-imports": "error",
-    "@typescript-eslint/no-useless-empty-export": "error",
-    "@typescript-eslint/prefer-enum-initializers": "error",
-    "@typescript-eslint/prefer-readonly": "error",
-    "no-return-await": "off",
-    "@typescript-eslint/return-await": "error",
-    "unicorn/custom-error-definition": "error",
-    "unicorn/empty-brace-spaces": "error",
-    "unicorn/no-array-for-each": "off",
-    "unicorn/no-array-reduce": "off",
-    "unicorn/no-console-spaces": "error",
-    "unicorn/no-null": "off",
-    "unicorn/prevent-abbreviations": [
-      "error",
-      {
-        "replacements": {
-          "arg": false,
-          "args": false,
-          "env": false
-        },
-        "ignore": [
-          "semVer",
-          "SemVer"
-        ]
-      }
-    ],
-    "n/handle-callback-err": "error",
-    "n/no-callback-literal": "error",
-    "n/no-new-require": "error",
-    "n/no-path-concat": "error"
-  }
+	"env": {
+		"es2022": true,
+		"node": true
+	},
+	"extends": [
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@typescript-eslint/recommended-type-checked",
+		"plugin:unicorn/recommended",
+		"plugin:n/recommended",
+		"plugin:security/recommended-legacy",
+		"prettier"
+	],
+	"overrides": [],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": "latest",
+		"project": ["./tsconfig.json"],
+		"sourceType": "module"
+	},
+	"ignorePatterns": ["bin", "test"],
+	"plugins": ["@typescript-eslint", "unicorn"],
+	"rules": {
+		"constructor-super": "error",
+		"for-direction": "error",
+		"no-await-in-loop": "error",
+		"no-constant-binary-expression": "error",
+		"no-duplicate-imports": "error",
+		"no-new-native-nonconstructor": "error",
+		"no-promise-executor-return": "error",
+		"no-self-compare": "error",
+		"no-template-curly-in-string": "error",
+		"no-unmodified-loop-condition": "error",
+		"no-unreachable-loop": "error",
+		"no-unused-private-class-members": "error",
+		"require-atomic-updates": "error",
+		"no-use-before-define": "error",
+		"camelcase": "error",
+		"@typescript-eslint/adjacent-overload-signatures": "error",
+		"@typescript-eslint/array-type": [
+			"error",
+			{
+				"default": "generic"
+			}
+		],
+		"@typescript-eslint/consistent-type-exports": "error",
+		"@typescript-eslint/consistent-type-imports": "error",
+		"@typescript-eslint/explicit-function-return-type": "error",
+		"@typescript-eslint/explicit-member-accessibility": "error",
+		"@typescript-eslint/explicit-module-boundary-types": "error",
+		"@typescript-eslint/no-import-type-side-effects": "error",
+		"@typescript-eslint/no-require-imports": "error",
+		"@typescript-eslint/no-useless-empty-export": "error",
+		"@typescript-eslint/prefer-enum-initializers": "error",
+		"@typescript-eslint/prefer-readonly": "error",
+		"@typescript-eslint/require-await": "off",
+		"no-return-await": "off",
+		"@typescript-eslint/return-await": "error",
+		"unicorn/custom-error-definition": "error",
+		"unicorn/empty-brace-spaces": "error",
+		"unicorn/no-array-for-each": "off",
+		"unicorn/no-array-reduce": "off",
+		"unicorn/no-console-spaces": "error",
+		"unicorn/no-null": "off",
+		"unicorn/prevent-abbreviations": [
+			"error",
+			{
+				"replacements": {
+					"arg": false,
+					"args": false,
+					"env": false
+				},
+				"ignore": ["semVer", "SemVer"]
+			}
+		],
+		"n/handle-callback-err": "error",
+		"n/no-callback-literal": "error",
+		"n/no-new-require": "error",
+		"n/no-path-concat": "error"
+	}
 }
