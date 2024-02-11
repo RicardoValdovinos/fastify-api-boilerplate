@@ -4,7 +4,7 @@ import { exampleRoutes } from "./modules/example/plugins/routes.js";
 
 const server = fastify();
 
-void server.register(exampleRoutes);
+await server.register(exampleRoutes);
 
 server.listen({ port: 3000 }, (error, address) => {
 	if (error) {
