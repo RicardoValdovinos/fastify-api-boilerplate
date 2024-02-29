@@ -1,10 +1,35 @@
 import fastify from "fastify";
 import closeWithGrace from "close-with-grace";
 import { exampleRoutes } from "./modules/example/plugins/routes.js";
+// eslint-disable-next-line n/no-unpublished-import
+import fastifyPrintRoutes from "fastify-print-routes";
 
-const server = fastify();
+const envToLogger = {
+	development: {
+		transport: {
+			target: "pino-pretty",
+			options: {
+				translateTime: "HH:MM:ss Z",
+				ignore: "pid,hostname",
+			},
+		},
+	},
+	production: true,
+	test: false,
+};
+const server = fastify({ logger: envToLogger["test"] ?? true });
 
-await server.register(exampleRoutes);
+/*
+Since fastify-print-routes uses an onRoute hook, you have to either:
+
+* use `await register...`
+* wrap you routes definitions in a plugin
+
+See: https://www.fastify.io/docs/latest/Guides/Migration-Guide-V4/#synchronous-route-definitions
+*/
+await server.register(fastifyPrintRoutes);
+
+await server.register(exampleRoutes, { prefix: "/api" });
 
 server.listen({ port: 3000 }, (error, address) => {
 	if (error) {
