@@ -1,10 +1,9 @@
 import type { FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-import { hello, root } from "../routes/index.js";
+import { exampleInstance } from "../routes/example.js";
 
-const exampleInstance: FastifyPluginAsync = async (instance) => {
-	instance.get("/", root);
-	instance.get("/hello", hello);
+const routePluginWrapper: FastifyPluginAsync = async (instance) => {
+	await instance.register(exampleInstance, { prefix: "/api" });
 };
 
-export const exampleRoutes = fp(exampleInstance);
+export const exampleRoutes = fp(routePluginWrapper, { name: "example-routes" });
