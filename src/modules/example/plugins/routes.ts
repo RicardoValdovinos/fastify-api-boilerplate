@@ -1,8 +1,11 @@
-import type { FastifyPluginAsync } from "fastify";
+import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import fp from "fastify-plugin";
-import { exampleInstance } from "../routes/example.js";
+import type { FastifyTypebox } from "../../../common/types.js";
+import { exampleInstance } from "../routes/example.route.js";
 
-const routePluginWrapper: FastifyPluginAsync = async (instance) => {
+const routePluginWrapper: FastifyPluginAsyncTypebox = async (
+	instance: FastifyTypebox
+) => {
 	await instance.register(exampleInstance, { prefix: "/api" });
 };
 

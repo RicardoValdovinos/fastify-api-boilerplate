@@ -1,23 +1,25 @@
-import fastify from "fastify";
+import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import closeWithGrace from "close-with-grace";
+import fastify, { type FastifyListenOptions } from "fastify";
 import { exampleRoutes } from "./modules/example/plugins/routes.js";
 // eslint-disable-next-line n/no-unpublished-import
 import fastifyPrintRoutes from "fastify-print-routes";
+import fastifyEnv from "@fastify/env";
+import { envOptions } from "./config/env.js";
 
 const envToLogger = {
-	development: {
-		transport: {
-			target: "pino-pretty",
-			options: {
-				translateTime: "HH:MM:ss Z",
-				ignore: "pid,hostname",
-			},
+	transport: {
+		target: "pino-pretty",
+		options: {
+			translateTime: "HH:MM:ss Z",
+			ignore: "pid,hostname",
 		},
 	},
-	production: true,
-	test: false,
 };
-const server = fastify({ logger: envToLogger["test"] ?? true });
+
+const server = fastify({
+	logger: envToLogger,
+}).withTypeProvider<TypeBoxTypeProvider>();
 
 /*
 Since fastify-print-routes uses an onRoute hook, you have to either:
@@ -29,21 +31,26 @@ See: https://www.fastify.io/docs/latest/Guides/Migration-Guide-V4/#synchronous-r
 */
 await server.register(fastifyPrintRoutes);
 
+await server.register(fastifyEnv, envOptions);
 await server.register(exampleRoutes, { prefix: "/api" });
 
-server.listen({ port: 3000 }, (error, address) => {
+const serverListenOptions: FastifyListenOptions = {
+	port: 3000,
+};
+
+server.listen(serverListenOptions, (error, address) => {
 	if (error) {
-		console.error(`Error starting server: ${error.message}`);
+		server.log.error(`Error starting server: ${error.message}`);
 	}
 
-	console.log(`Server listening at ${address}`);
+	server.log.info(`Server listening at ${address}`);
 });
 
 closeWithGrace({ delay: 500 }, async function ({ signal, err, manual }) {
 	if (err) {
-		console.error(err);
+		server.log.error(err);
 	}
 
-	console.log(`closeWithGrace: signal=${signal}, manual=${manual}`);
+	server.log.info(`closeWithGrace: signal=${signal}, manual=${manual}`);
 	await server.close();
 });
