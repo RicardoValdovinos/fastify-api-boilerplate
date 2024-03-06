@@ -4,10 +4,11 @@ import { Kysely, PostgresDialect } from "kysely";
 
 const dialect = new PostgresDialect({
 	pool: new Pool({
-		database: "test",
-		host: "localhost",
-		user: "admin",
-		port: 5434,
+		database: process.env.DATABASE_NAME,
+		host: process.env.DATABASE_HOST,
+		user: process.env.DATABASE_USER,
+		password: process.env.DATABASE_PASSWORD,
+		port: process.env.DATABASE_PORT,
 		max: 10,
 	}),
 });
@@ -16,6 +17,8 @@ const dialect = new PostgresDialect({
 // knows your database structure.
 // Dialect is passed to Kysely's constructor, and from now on, Kysely knows how
 // to communicate with your database.
-export const db = new Kysely<Database>({
+export const database = new Kysely<Database>({
 	dialect,
 });
+
+export type Database = typeof database;
