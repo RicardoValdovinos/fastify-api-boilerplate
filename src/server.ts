@@ -1,25 +1,24 @@
+import fastifyEnv from "@fastify/env";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import closeWithGrace from "close-with-grace";
-import fastify, { type FastifyListenOptions } from "fastify";
+import fastify, {
+	type FastifyListenOptions,
+	type FastifyServerOptions,
+} from "fastify";
 import { exampleRoutes } from "./modules/example/plugins/routes.js";
 // eslint-disable-next-line n/no-unpublished-import
 import fastifyPrintRoutes from "fastify-print-routes";
-import fastifyEnv from "@fastify/env";
+import type { FastifyTypebox } from "./common/types.js";
 import { envOptions } from "./config/env.js";
+import { logger } from "./config/logger.js";
+import { database } from "./config/database.js";
 
-const envToLogger = {
-	transport: {
-		target: "pino-pretty",
-		options: {
-			translateTime: "HH:MM:ss Z",
-			ignore: "pid,hostname",
-		},
-	},
+const serverOptions: FastifyServerOptions = {
+	logger,
 };
 
-const server = fastify({
-	logger: envToLogger,
-}).withTypeProvider<TypeBoxTypeProvider>();
+const server: FastifyTypebox =
+	fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
 /*
 Since fastify-print-routes uses an onRoute hook, you have to either:
@@ -32,23 +31,23 @@ See: https://www.fastify.io/docs/latest/Guides/Migration-Guide-V4/#synchronous-r
 await server.register(fastifyPrintRoutes);
 
 await server.register(fastifyEnv, envOptions);
-await server.register(exampleRoutes, { prefix: "/api" });
+await server.register(exampleRoutes);
+
+server.decorate("database", database);
 
 const serverListenOptions: FastifyListenOptions = {
-	port: 3000,
+	port: server.config.PORT,
 };
 
-server.listen(serverListenOptions, (error, address) => {
+server.listen(serverListenOptions, (error) => {
 	if (error) {
 		server.log.error(`Error starting server: ${error.message}`);
 	}
-
-	server.log.info(`Server listening at ${address}`);
 });
 
 closeWithGrace({ delay: 500 }, async function ({ signal, err, manual }) {
 	if (err) {
-		server.log.error(err);
+		server.log.error({ err });
 	}
 
 	server.log.info(`closeWithGrace: signal=${signal}, manual=${manual}`);
