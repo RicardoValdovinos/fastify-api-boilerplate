@@ -1,4 +1,4 @@
-import fastifyEnv from "@fastify/env";
+import env from "@fastify/env";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import closeWithGrace from "close-with-grace";
 import fastify, {
@@ -12,6 +12,18 @@ import type { FastifyTypebox } from "./common/types.js";
 import { envOptions } from "./config/env.js";
 import { logger } from "./config/logger.js";
 import { database } from "./config/database.js";
+import swagger from "@fastify/swagger"
+import swaggerUI from "@fastify/swagger-ui"
+import { swaggerOptions, swaggerUIOptions } from "./config/swagger.js";
+import helmet from '@fastify/helmet'
+import rateLimit from '@fastify/rate-limit'
+import { rateLimitOptions } from "./config/rate-limit.js";
+import multipart from "@fastify/multipart"
+import sensible from "@fastify/sensible"
+import underPressure from '@fastify/under-pressure'
+import { underPressureOptions } from "./config/under-pressure.js";
+import fastifyStatic from "@fastify/static"
+import { fastifyStaticOptions } from "./config/static.js";
 
 const serverOptions: FastifyServerOptions = {
 	logger,
@@ -29,8 +41,16 @@ Since fastify-print-routes uses an onRoute hook, you have to either:
 See: https://www.fastify.io/docs/latest/Guides/Migration-Guide-V4/#synchronous-route-definitions
 */
 await server.register(fastifyPrintRoutes);
+await server.register(sensible)
+await server.register(env, envOptions);
+await server.register(helmet)
+await server.register(rateLimit, rateLimitOptions)
+await server.register(underPressure, underPressureOptions)
+await server.register(multipart)
+await server.register(fastifyStatic, fastifyStaticOptions)
+await server.register(swagger, swaggerOptions)
+await server.register(swaggerUI, swaggerUIOptions)
 
-await server.register(fastifyEnv, envOptions);
 await server.register(exampleRoutes);
 
 server.decorate("database", database);
@@ -45,7 +65,7 @@ server.listen(serverListenOptions, (error) => {
 	}
 });
 
-closeWithGrace({ delay: 500 }, async function ({ signal, err, manual }) {
+closeWithGrace({ delay: 500 }, async function({ signal, err, manual }) {
 	if (err) {
 		server.log.error({ err });
 	}
