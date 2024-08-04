@@ -6,12 +6,12 @@ import fastify, {
 	type FastifyServerOptions,
 } from "fastify";
 import { exampleRoutes } from "./modules/example/plugins/routes.js";
-// eslint-disable-next-line n/no-unpublished-import
+ 
 import fastifyPrintRoutes from "fastify-print-routes";
 import type { FastifyTypebox } from "./common/types.js";
 import { envOptions } from "./config/env.js";
 import { logger } from "./config/logger.js";
-import { database } from "./config/database.js";
+import { database } from "./config/database/index.js";
 
 const serverOptions: FastifyServerOptions = {
 	logger,

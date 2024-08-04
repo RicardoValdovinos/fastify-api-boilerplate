@@ -1,4 +1,4 @@
-import type { Database } from "./config/database.ts";
+import type { Database } from "./config/database/index.ts";
 import type { envSchemaType } from "./config/env.ts";
 
 declare module "fastify" {
