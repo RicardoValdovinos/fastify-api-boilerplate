@@ -1,4 +1,4 @@
-const config = {
+const prettierConfig = {
 	"printWidth": 80,
 	"tabWidth": 2,
 	"useTabs": true,
@@ -18,4 +18,4 @@ const config = {
 	"embeddedLanguageFormatting": "auto",
 	"singleAttributePerLine": false
 }
-export default config
+export default prettierConfig
