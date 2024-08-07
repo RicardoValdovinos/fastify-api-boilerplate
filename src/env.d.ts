@@ -1,10 +1,8 @@
-import type { Database } from "./config/database/index.ts";
-import type { envSchemaType } from "./config/env.ts";
+import type { envSchemaType } from "./configs/env.ts";
 
 declare module "fastify" {
 	interface FastifyInstance {
 		config: envSchemaType;
-		database: Database;
 	}
 }
 
