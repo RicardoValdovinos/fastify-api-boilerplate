@@ -13,7 +13,7 @@ import type {
 	RouteHandlerMethod,
 } from "fastify";
 
-export type FastifyTypebox = FastifyInstance<
+export type FastifyInstanceTypebox = FastifyInstance<
 	RawServerDefault,
 	RawRequestDefaultExpression<RawServerDefault>,
 	RawReplyDefaultExpression<RawServerDefault>,
