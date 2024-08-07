@@ -1,12 +1,12 @@
-import type { FastifyPluginAsync } from "fastify";
-import type { FastifyTypebox } from "../../../common/types.js";
+import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
+import type { FastifyInstanceTypebox } from "../../../common/types.js";
 import { getExampleById, getExamples } from "./example.handler.js";
 import { GetExampleByIdSchema, getExamplesSchema } from "./example.schema.js";
 
-export const exampleInstance: FastifyPluginAsync = async (
-	instance: FastifyTypebox
+export const exampleInstance: FastifyPluginAsyncTypebox = async (
+	instance: FastifyInstanceTypebox
 ) => {
-	instance.get("/examples", { schema: getExamplesSchema }, getExamples);
+	instance.get("/example", { schema: getExamplesSchema }, getExamples);
 	instance.get(
 		"/example/:id",
 		{ schema: GetExampleByIdSchema },

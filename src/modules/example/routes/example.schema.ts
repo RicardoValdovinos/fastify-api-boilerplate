@@ -7,12 +7,7 @@ const GetExamplesResponse = Type.Object({
 export type GetExamplesResponeType = Static<typeof GetExamplesResponse>;
 export const getExamplesSchema = {
 	response: {
-		200: {
-			type: "object",
-			properties: {
-				hello: { type: "string" },
-			},
-		},
+		200: GetExamplesResponse,
 	},
 } satisfies FastifySchema;
 
@@ -25,8 +20,6 @@ export const GetExampleByIdSchema = {
 		id: Type.String(),
 	}),
 	response: {
-		200: Type.Object({
-			hello: Type.String(),
-		}),
+		200: GetExampleByIdResponse,
 	},
 } satisfies FastifySchema;
