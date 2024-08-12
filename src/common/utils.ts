@@ -2,25 +2,28 @@ import type { FastifyInstance } from "fastify";
 import { dirname } from "node:path";
 
 export const runOnlyInDevelopment = (
-	instance: FastifyInstance,
+	environment: FastifyInstance["config"]["NODE_ENV"],
 	callback: () => void
 ): void => {
-	if (instance.config.NODE_ENV.toLowerCase() !== "production") {
+	if (environment.toLowerCase() !== "production") {
 		callback();
 	}
 };
 
 export const runOnlyInDevelopmentAsync = async (
-	instance: FastifyInstance,
+	environment: FastifyInstance["config"]["NODE_ENV"],
 	callback: () => Promise<void>
 ): Promise<void> => {
-	if (instance.config.NODE_ENV.toLowerCase() !== "production") {
+	if (environment.toLowerCase() !== "production") {
 		await callback();
 	}
 };
 
 export const getRootDirectory = (): string => {
-	const currentWorkingDirectory = dirname(import.meta.dirname ?? "")
-	const root = currentWorkingDirectory.substring(0, currentWorkingDirectory.lastIndexOf("/src"))
-	return root
-}
+	const currentWorkingDirectory = dirname(import.meta.dirname ?? "");
+	const root = currentWorkingDirectory.substring(
+		0,
+		currentWorkingDirectory.lastIndexOf("/src")
+	);
+	return root;
+};

@@ -1,6 +1,6 @@
 import type { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox'
+import type { FastifyInstance } from 'fastify'
 import fp from 'fastify-plugin'
-import type { FastifyInstanceTypebox } from '../types.js'
 
 /**
  * When exposing an application to the public internet, it's a good
@@ -17,9 +17,9 @@ import type { FastifyInstanceTypebox } from '../types.js'
  * of the officially supported stores, so we'll write a custom one.
  */
 const rateLimit: FastifyPluginAsyncTypebox = async (
-  instance: FastifyInstanceTypebox
-) => {
-  console.log(instance.version)
+  instance: FastifyInstance
+): Promise<void> => {
+  console.log({ version: instance.version })
 }
 
 

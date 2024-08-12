@@ -5,13 +5,13 @@ import type {
 } from "fastify";
 import fp from "fastify-plugin";
 
-const authorization: FastifyPluginAsyncTypebox = async (
+const database: FastifyPluginAsyncTypebox = async (
   instance: FastifyInstance,
   options: FastifyPluginOptions
 ): Promise<void> => {
   console.log({ version: instance.version, options })
 };
 
-export default fp(authorization, {
-  name: "authorization",
+export default fp(database, {
+  name: "database",
 });
