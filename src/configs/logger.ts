@@ -41,7 +41,7 @@ const getLoggerForEnvironment = (environment: string): LoggerOptions => {
 		return developmentLogger;
 	}
 
-	if (process.env.NODE_ENV.toLowerCase() === "production") {
+	if (environment === "production") {
 		const productionLogger: LoggerOptions = {
 			timestamp: () => `",timestamp":"${new Date(Date.now()).toISOString()}"`,
 			transport: {
