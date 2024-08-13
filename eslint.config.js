@@ -11,6 +11,7 @@ import globals from "globals";
 import typescriptESLint from 'typescript-eslint';
 
 const eslintConfig = typescriptESLint.config(
+	{ files: ["src/**/*.ts"] },
 	eslintJS.configs.recommended,
 	{
 		name: "base",
@@ -87,7 +88,6 @@ const eslintConfig = typescriptESLint.config(
 			}
 		},
 		"rules": {
-			// turn on errors for missing imports
 			"import/no-unresolved": "error"
 		},
 	},
@@ -125,19 +125,55 @@ const eslintConfig = typescriptESLint.config(
 		plugins: { security: eslintPluginSecurity }
 	},
 	{
+		name: "node",
+		languageOptions: {
+			globals: {
+				...globals.es2021,
+				...globals.node,
+				__dirname: "off",
+				__filename: "off",
+				exports: "off",
+				module: "off",
+				require: "off",
+			},
+			parserOptions: {
+				ecmaFeatures: { globalReturn: false },
+				ecmaVersion: 2021,
+				sourceType: "module",
+			},
+		},
+		rules: {
+			"n/no-deprecated-api": "error",
+			"n/no-extraneous-import": "error",
+			"n/no-extraneous-require": "error",
+			"n/no-exports-assign": "error",
+			"n/no-missing-import": "error",
+			"n/no-missing-require": "error",
+			"n/no-process-exit": "error",
+			"n/no-unpublished-bin": "error",
+			"n/no-unpublished-import": "error",
+			"n/no-unpublished-require": "error",
+			"n/no-unsupported-features/es-builtins": "error",
+			"n/no-unsupported-features/node-builtins": "error",
+			"n/process-exit-as-throw": "error",
+			"n/hashbang": "error",
+			"n/no-unsupported-features/es-syntax": [
+				"error",
+				{ ignores: ["modules"] },
+			],
+		},
+	},
+	{
 		name: "n",
 		plugins: { n: eslintPluginN },
 		rules: {
 			"n/handle-callback-err": "error",
 			"n/no-callback-literal": "error",
 			"n/no-new-require": "error",
-			"n/no-path-concat": "error"
+			"n/no-path-concat": "error",
+			"n/prefer-node-protocol": "error"
 		}
 	}
 )
-
-eslintConfig.map((config) => {
-	config.files = ["src/**/*.ts"]
-})
 
 export default eslintConfig
