@@ -16,6 +16,10 @@ const serverOptions: FastifyServerOptions = {
 
 const server: FastifyInstanceTypebox = fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
+/* TODO: implement rate-limit plugin */
+/* TODO: implement database plugin */
+/* TODO: implement authorization plugin*/
+
 await server.register(Autoload, {
 	dir: path.join(getRootDirectory(), "src/common/plugins"),
 })
