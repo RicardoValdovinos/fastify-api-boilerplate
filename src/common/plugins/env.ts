@@ -4,8 +4,6 @@ import type { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import fp from 'fastify-plugin';
 import { envSchema } from '../../configs/env.js';
 
-
-
 /**
  * It's very common to pass secrets and configuration
  * to your application via environment variables.
@@ -23,11 +21,6 @@ const env: FastifyPluginAsyncTypebox = async (
   })
 }
 
-
 export default fp(env, {
   name: 'env',
 })
-
-
-
-
