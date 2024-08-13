@@ -8,13 +8,13 @@ import fp from "fastify-plugin";
  * https://en.wikipedia.org/wiki/Cross-origin_resource_sharing
  */
 const cors: FastifyPluginAsyncTypebox = async (
-    instance: FastifyInstance,
+  instance: FastifyInstance,
 ): Promise<void> => {
-    await instance.register(Cors, {
-        origin: false,
-    })
+  await instance.register(Cors, {
+    origin: false,
+  })
 };
 
 export default fp(cors, {
-    name: "cors",
+  name: "cors",
 });

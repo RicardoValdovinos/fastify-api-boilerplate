@@ -9,7 +9,7 @@ const authorization: FastifyPluginAsyncTypebox = async (
   instance: FastifyInstance,
   options: FastifyPluginOptions
 ): Promise<void> => {
-  console.log({ version: instance.version, options })
+  instance.log.info({ version: instance.version, options })
 };
 
 export default fp(authorization, {

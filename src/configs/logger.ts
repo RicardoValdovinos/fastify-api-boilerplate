@@ -13,7 +13,7 @@ type LoggerTransportSingleOptions = Extract<
 >;
 
 const logsDirectory = path.join(getRootDirectory(), "logs");
-const logFileName = new Date().toISOString()
+const logFileName = new Date().toISOString();
 
 const fileTransport: LoggerTransportSingleOptions = {
 	target: "pino/file",
@@ -24,10 +24,10 @@ const fileTransport: LoggerTransportSingleOptions = {
 };
 
 const pinoPrettyTransport: LoggerTransportSingleOptions = {
-	target: 'pino-pretty',
+	target: "pino-pretty",
 	options: {
-		translateTime: 'HH:MM:ss Z',
-		ignore: 'pid,hostname',
+		translateTime: "HH:MM:ss Z",
+		ignore: "pid,hostname",
 	},
 };
 
@@ -35,23 +35,25 @@ const getLoggerForEnvironment = (environment: string): LoggerOptions => {
 	if (environment === "development") {
 		const developmentLogger: LoggerOptions = {
 			transport: {
-				targets: [pinoPrettyTransport]
+				targets: [pinoPrettyTransport],
 			},
-		}
-		return developmentLogger
+		};
+		return developmentLogger;
 	}
 
 	if (process.env.NODE_ENV.toLowerCase() === "production") {
 		const productionLogger: LoggerOptions = {
 			timestamp: () => `",timestamp":"${new Date(Date.now()).toISOString()}"`,
 			transport: {
-				targets: [fileTransport]
+				targets: [fileTransport],
 			},
-		}
-		return productionLogger
+		};
+		return productionLogger;
 	}
 
 	return false;
-}
+};
 
-export const logger: LoggerOptions = getLoggerForEnvironment(process.env.NODE_ENV.toLowerCase()); 
+export const logger: LoggerOptions = getLoggerForEnvironment(
+	process.env.NODE_ENV.toLowerCase()
+);

@@ -14,7 +14,6 @@ const sensible: FastifyPluginAsyncTypebox = async (
     instance: FastifyInstance,
 ): Promise<void> => {
     await instance.register(Sensible)
-
 };
 
 export default fp(sensible, {

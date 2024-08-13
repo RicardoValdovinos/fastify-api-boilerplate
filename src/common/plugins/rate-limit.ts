@@ -19,9 +19,8 @@ import fp from 'fastify-plugin'
 const rateLimit: FastifyPluginAsyncTypebox = async (
   instance: FastifyInstance
 ): Promise<void> => {
-  console.log({ version: instance.version })
+  instance.log.info({ version: instance.version })
 }
-
 
 export default fp(rateLimit, {
   name: 'rateLimit',

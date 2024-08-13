@@ -16,7 +16,6 @@ const env: FastifyPluginAsyncTypebox = async (
   instance: FastifyInstance,
   options: FastifyPluginOptions
 ): Promise<void> => {
-
   await instance.register(fastifyEnv, {
     schema: envSchema,
     dotenv: true,

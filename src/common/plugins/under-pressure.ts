@@ -11,12 +11,12 @@ import fp from 'fastify-plugin';
 const underPressure: FastifyPluginAsyncTypebox = async (
   instance: FastifyInstance
 ): Promise<void> => {
-    await instance.register(UnderPressure, {
-        maxEventLoopDelay: 1000,
-        maxHeapUsedBytes: 1000000000,
-        maxRssBytes: 1000000000,
-        maxEventLoopUtilization: 0.98,
-    })
+  await instance.register(UnderPressure, {
+    maxEventLoopDelay: 1000,
+    maxHeapUsedBytes: 1000000000,
+    maxRssBytes: 1000000000,
+    maxEventLoopUtilization: 0.98,
+  })
 }
 
 export default fp(underPressure, {

@@ -5,7 +5,7 @@ import fastify, {
 	type FastifyListenOptions,
 	type FastifyServerOptions,
 } from "fastify";
-import path from "path";
+import path from "node:path";
 import type { FastifyInstanceTypebox } from "./common/types.js";
 import { getRootDirectory } from "./common/utils.js";
 import { logger } from "./configs/logger.js";
@@ -16,10 +16,6 @@ const serverOptions: FastifyServerOptions = {
 
 const server: FastifyInstanceTypebox = fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
-// Normally you would need to load by hand each plugin. `fastify-autoload` is an utility
-// written to solve this specific problems. It loads all the content from the specified
-// folder, even the subfolders. Take at look at its documentation, as it's doing a lot more!
-// First of all, we require all the plugins that we'll need in our application.
 await server.register(Autoload, {
 	dir: path.join(getRootDirectory(), "src/common/plugins"),
 })
@@ -27,6 +23,16 @@ await server.register(Autoload, {
 	dir: path.join(getRootDirectory(), "src/modules/"),
 	matchFilter: "plugins",
 })
+
+closeWithGrace({ delay: 500 }, async ({ signal, err, manual }) => {
+	if (err) {
+		server.log.error({ err });
+	} else {
+		server.log.info(`closeWithGrace: signal=${signal}, manual=${manual}`);
+	}
+
+	await server.close();
+});
 
 const serverListenOptions: FastifyListenOptions = {
 	port: server.config.PORT,
@@ -38,11 +44,3 @@ server.listen(serverListenOptions, (error) => {
 	}
 });
 
-closeWithGrace({ delay: 500 }, async ({ signal, err, manual }) => {
-	if (err) {
-		server.log.error({ err });
-	}
-
-	server.log.info(`closeWithGrace: signal=${signal}, manual=${manual}`);
-	await server.close();
-});
