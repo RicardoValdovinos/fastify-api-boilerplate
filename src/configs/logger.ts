@@ -1,34 +1,57 @@
 import type { FastifyServerOptions } from "fastify";
-import type { PinoLoggerOptions } from "fastify/types/logger.js";
-import path from "path";
+import path from "node:path";
 import { getRootDirectory } from "../common/utils.js";
 
-type LoggerOptions = FastifyServerOptions["logger"];
+type LoggerOptions = NonNullable<FastifyServerOptions["logger"]>;
 
-type LoggerTransportOptions = PinoLoggerOptions["transport"];
+const options: LoggerOptions = {}; // eslint-disable-line @typescript-eslint/no-unused-vars
+
+type LoggerTransportOptions = (typeof options)["transport"];
 type LoggerTransportSingleOptions = Extract<
 	LoggerTransportOptions,
 	{ target: string }
 >;
 
+const logsDirectory = path.join(getRootDirectory(), "logs");
+const logFileName = new Date().toISOString()
+
 const fileTransport: LoggerTransportSingleOptions = {
 	target: "pino/file",
 	options: {
-		destination: `${path.join(getRootDirectory(), "logs")}-${new Date().toISOString()}`,
+		destination: `${logsDirectory}/${logFileName}`,
 		mkdir: true,
 	},
 };
 
 const pinoPrettyTransport: LoggerTransportSingleOptions = {
-	target: "pino-pretty",
+	target: 'pino-pretty',
 	options: {
-		translateTime: "HH:MM:ss Z",
-		ignore: "pid,hostname",
+		translateTime: 'HH:MM:ss Z',
+		ignore: 'pid,hostname',
 	},
 };
 
-export const logger: LoggerOptions = {
-	transport: {
-		targets: [fileTransport, pinoPrettyTransport],
-	},
-};
+const getLoggerForEnvironment = (environment: string): LoggerOptions => {
+	if (environment === "development") {
+		const developmentLogger: LoggerOptions = {
+			transport: {
+				targets: [pinoPrettyTransport]
+			},
+		}
+		return developmentLogger
+	}
+
+	if (process.env.NODE_ENV.toLowerCase() === "production") {
+		const productionLogger: LoggerOptions = {
+			timestamp: () => `",timestamp":"${new Date(Date.now()).toISOString()}"`,
+			transport: {
+				targets: [fileTransport]
+			},
+		}
+		return productionLogger
+	}
+
+	return false;
+}
+
+export const logger: LoggerOptions = getLoggerForEnvironment(process.env.NODE_ENV.toLowerCase()); 
