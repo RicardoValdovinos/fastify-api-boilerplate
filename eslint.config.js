@@ -3,15 +3,18 @@
 import eslintJS from '@eslint/js';
 import typescriptESLintParser from "@typescript-eslint/parser";
 import eslintConfigPrettier from 'eslint-config-prettier';
-import * as eslintPluginImport from 'eslint-plugin-import';
+import * as eslintPluginImport from 'eslint-plugin-import-x';
 import eslintPluginN from 'eslint-plugin-n';
 import eslintPluginSecurity from 'eslint-plugin-security';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import globals from "globals";
-import typescriptESLint from 'typescript-eslint';
+import {
+	config as typescriptESLintConfig,
+	configs as typescriptESLintConfigs
+} from 'typescript-eslint';
 
-const eslintConfig = typescriptESLint.config(
-	{ files: ["src/**/*.ts"] },
+const eslintConfig = typescriptESLintConfig(
+	{ files: ["src/**/*.ts", "test/**/*.ts"] },
 	eslintJS.configs.recommended,
 	{
 		name: "base",
@@ -37,14 +40,18 @@ const eslintConfig = typescriptESLint.config(
 			"no-return-await": "off",
 		}
 	},
-	...typescriptESLint.configs.recommendedTypeChecked,
+	...typescriptESLintConfigs.recommendedTypeChecked,
 	{
 		name: "typescript",
 		languageOptions: {
 			globals: { ...globals.node, ...globals.es2025 },
 			parser: typescriptESLintParser,
 			parserOptions: {
-				projectService: true,
+				project: "./tsconfig.json",
+				projectService: {
+					defaultProject: "./tsconfig.json",
+					allowDefaultProject: ["eslint.config.js", "commitlint.config.ts", "prettier.config.js", "vitest.config.ts"]
+				},
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},
@@ -62,7 +69,7 @@ const eslintConfig = typescriptESLint.config(
 			"@typescript-eslint/require-await": "off",
 			"@typescript-eslint/return-await": "error",
 			"@typescript-eslint/adjacent-overload-signatures": "error",
-			"@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "Type\." }],
+			"@typescript-eslint/no-unused-vars": "error",
 			"@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: 'with-single-extends' }],
 			"@typescript-eslint/array-type": [
 				"error",
@@ -73,13 +80,16 @@ const eslintConfig = typescriptESLint.config(
 		}
 	},
 	{
-		name: "import",
-		plugins: { import: eslintPluginImport },
+		name: "import-x",
+		plugins: { 'import-x': eslintPluginImport },
+		languageOptions: {
+			parserOptions: eslintPluginImport.configs.recommended.parserOptions
+		},
 		settings: {
-			"import/parsers": {
+			"import-x/parsers": {
 				"@typescript-eslint/parser": [".ts", ".tsx"]
 			},
-			"import/resolver": {
+			"import-x/resolver": {
 				typescript: {
 					alwaysTryTypes: true,
 					project: "./tsconfig.json",
@@ -87,11 +97,8 @@ const eslintConfig = typescriptESLint.config(
 				node: true
 			}
 		},
-		"rules": {
-			"import/no-unresolved": "error"
-		},
+		rules: eslintPluginImport.configs.recommended.rules
 	},
-	eslintConfigPrettier,
 	{
 		name: "unicorn",
 		languageOptions: {
@@ -150,9 +157,9 @@ const eslintConfig = typescriptESLint.config(
 			"n/no-missing-import": "error",
 			"n/no-missing-require": "error",
 			"n/no-process-exit": "error",
-			"n/no-unpublished-bin": "error",
-			"n/no-unpublished-import": "error",
-			"n/no-unpublished-require": "error",
+			"n/no-unpublished-bin": "off",
+			"n/no-unpublished-import": "off",
+			"n/no-unpublished-require": "off",
 			"n/no-unsupported-features/es-builtins": "error",
 			"n/no-unsupported-features/node-builtins": "error",
 			"n/process-exit-as-throw": "error",
@@ -176,4 +183,4 @@ const eslintConfig = typescriptESLint.config(
 	}
 )
 
-export default eslintConfig
+export default [...eslintConfig, eslintConfigPrettier]
