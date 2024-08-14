@@ -1,4 +1,4 @@
-import fastifyEnv from '@fastify/env';
+import {fastifyEnv} from '@fastify/env';
 import type { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox';
 import type { FastifyInstance, FastifyPluginOptions } from 'fastify';
 import fp from 'fastify-plugin';

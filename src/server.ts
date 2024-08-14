@@ -1,7 +1,8 @@
 import Autoload from "@fastify/autoload";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import closeWithGrace from "close-with-grace";
-import fastify, {
+import {
+	fastify,
 	type FastifyListenOptions,
 	type FastifyServerOptions,
 } from "fastify";
