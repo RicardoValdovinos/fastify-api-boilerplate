@@ -6,7 +6,7 @@ import {
 	type FastifyListenOptions,
 	type FastifyServerOptions,
 } from "fastify";
-import path from "node:path";
+import path, { normalize } from "node:path";
 import type { FastifyInstanceTypebox } from "./common/types.js";
 import { getRootDirectory } from "./common/utils.js";
 import { logger } from "./configs/logger.js";
@@ -15,19 +15,16 @@ const serverOptions: FastifyServerOptions = {
 	logger,
 };
 
-const server: FastifyInstanceTypebox = fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
-
-/* TODO: implement rate-limit plugin */
-/* TODO: implement database plugin */
-/* TODO: implement authorization plugin*/
+const server: FastifyInstanceTypebox =
+	fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
 await server.register(Autoload, {
-	dir: path.join(getRootDirectory(), "src/common/plugins"),
-})
+	dir: path.join(getRootDirectory(), normalize("src/common/plugins")),
+});
 await server.register(Autoload, {
-	dir: path.join(getRootDirectory(), "src/modules/"),
+	dir: path.join(getRootDirectory(), normalize("src/modules/")),
 	matchFilter: "plugins",
-})
+});
 
 closeWithGrace({ delay: 500 }, async ({ signal, err, manual }) => {
 	if (err) {
@@ -48,4 +45,3 @@ server.listen(serverListenOptions, (error) => {
 		server.log.error(`Error starting server: ${error.message}`);
 	}
 });
-
