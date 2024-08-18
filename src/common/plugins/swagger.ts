@@ -53,4 +53,5 @@ const swaggerGenerator: FastifyPluginAsync = async (
 
 export default fp(swaggerGenerator, {
 	name: "swaggerGenerator",
+	dependencies: ["env"],
 });

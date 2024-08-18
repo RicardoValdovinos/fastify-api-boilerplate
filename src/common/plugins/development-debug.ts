@@ -3,7 +3,7 @@ import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
 /**
- * Plugins that you only expect to run during development should be registered here
+ * Plugins that should only run during development should be registered here
  */
 const developmentDebug: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
@@ -13,7 +13,9 @@ const developmentDebug: FastifyPluginAsyncTypebox = async (
 		return;
 	}
 
-	// await instance.register(dev_only_plugin_here);
+	await instance.register((instance) => {
+		instance.log.info("Example development plugin registered!");
+	});
 };
 
 export default fp(developmentDebug, {

@@ -1,7 +1,7 @@
 import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import type { FastifyInstance, FastifyPluginOptions } from "fastify";
 import fp from "fastify-plugin";
-import { Pool, type PoolConfig } from "pg";
+import pg, { type PoolConfig } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
 import type { DB } from "../types.js";
 
@@ -14,7 +14,7 @@ const database: FastifyPluginAsyncTypebox = async (
 		max: 10,
 	};
 
-	const pool = new Pool(poolConfig);
+	const pool = new pg.Pool(poolConfig);
 
 	const dialect = new PostgresDialect({
 		pool,

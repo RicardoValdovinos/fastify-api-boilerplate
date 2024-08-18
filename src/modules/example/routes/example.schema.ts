@@ -17,7 +17,7 @@ const GetExampleByIdResponse = Type.Object({
 export type GetExampleByIdResponeType = Static<typeof GetExampleByIdResponse>;
 export const GetExampleByIdSchema = {
 	params: Type.Object({
-		id: Type.String(),
+		id: Type.Number(),
 	}),
 	response: {
 		200: GetExampleByIdResponse,

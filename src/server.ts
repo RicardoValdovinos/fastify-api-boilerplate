@@ -6,7 +6,7 @@ import {
 	type FastifyListenOptions,
 	type FastifyServerOptions,
 } from "fastify";
-import path, { normalize } from "node:path";
+import path from "node:path";
 import type { FastifyInstanceTypebox } from "./common/types.js";
 import { getRootDirectory } from "./common/utils.js";
 import { logger } from "./configs/logger.js";
@@ -19,10 +19,10 @@ const server: FastifyInstanceTypebox =
 	fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
 await server.register(Autoload, {
-	dir: path.join(getRootDirectory(), normalize("src/common/plugins")),
+	dir: path.join(getRootDirectory(), path.normalize("src/common/plugins")),
 });
 await server.register(Autoload, {
-	dir: path.join(getRootDirectory(), normalize("src/modules/")),
+	dir: path.join(getRootDirectory(), path.normalize("src/modules/")),
 	matchFilter: "plugins",
 });
 
