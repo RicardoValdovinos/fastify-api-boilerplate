@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "setup": "git init && husky install",
+    "kysely:codegen": "kysely-codegen",
     "format": "prettier src/**/*.ts --write",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
