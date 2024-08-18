@@ -69,7 +69,14 @@ const eslintConfig = typescriptESLintConfig(
 			"@typescript-eslint/require-await": "off",
 			"@typescript-eslint/return-await": "error",
 			"@typescript-eslint/adjacent-overload-signatures": "error",
-			"@typescript-eslint/no-unused-vars": "error",
+			"@typescript-eslint/no-unused-vars": [
+				"error",
+				{
+					"argsIgnorePattern": "^_",
+					"varsIgnorePattern": "^_",
+					"caughtErrorsIgnorePattern": "^_"
+				}
+			],
 			"@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: 'with-single-extends' }],
 			"@typescript-eslint/array-type": [
 				"error",
