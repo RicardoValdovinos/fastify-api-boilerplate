@@ -1,5 +1,5 @@
 import type { FastifyServerOptions } from "fastify";
-import path from "node:path";
+import path, { normalize } from "node:path";
 import { getRootDirectory } from "../common/utils.js";
 
 type LoggerOptions = NonNullable<FastifyServerOptions["logger"]>;
@@ -14,11 +14,12 @@ type LoggerTransportSingleOptions = Extract<
 
 const logsDirectory = path.join(getRootDirectory(), "logs");
 const logFileName = new Date().toISOString();
+const logPath = normalize(path.join(logsDirectory, logFileName));
 
 const fileTransport: LoggerTransportSingleOptions = {
 	target: "pino/file",
 	options: {
-		destination: `${logsDirectory}/${logFileName}`,
+		destination: logPath,
 		mkdir: true,
 	},
 };
