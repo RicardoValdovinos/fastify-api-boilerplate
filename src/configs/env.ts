@@ -5,7 +5,7 @@ export const envSchema = Type.Object({
 	PORT: Type.Number({ default: 3000 }),
 	COOKIE_SECRET: Type.String(),
 	ALLOWED_USERS: Type.String(),
-	DATABASE_RUL: Type.String(),
+	DATABASE_URL: Type.String(),
 });
 
 export type envSchemaType = Static<typeof envSchema>;

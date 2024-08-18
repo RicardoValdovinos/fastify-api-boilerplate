@@ -50,3 +50,13 @@ export type FastifyReplyTypebox<TSchema extends FastifySchema> = FastifyReply<
 	TSchema,
 	TypeBoxTypeProvider
 >;
+
+export interface Person {
+	id: number;
+	name: string | null;
+	age: string | null;
+}
+
+export interface DB {
+	Person: Person;
+}

@@ -1,8 +1,10 @@
+import { Kysely } from "kysely";
 import type { envSchemaType } from "./configs/env.ts";
 
 declare module "fastify" {
 	interface FastifyInstance {
 		config: envSchemaType;
+		database: Kysely<DB>;
 	}
 }
 
