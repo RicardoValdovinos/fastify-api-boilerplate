@@ -1,8 +1,8 @@
 {
 	"$schema": "https://json.schemastore.org/tsconfig",
 	"display": "fastify-api-boilerplate",
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "dist", "logs", "src/modules/test/**/*.ts"],
+	"include": ["src", "package.json"],
+	"exclude": ["node_modules", "dist", "logs", "src/modules/**/*.test.ts"],
 	"compilerOptions": {
 		"lib": ["ESNext"],
 		"allowJs": false,
