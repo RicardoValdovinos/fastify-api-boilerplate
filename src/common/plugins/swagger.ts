@@ -2,7 +2,6 @@ import Swagger, { type SwaggerOptions } from "@fastify/swagger";
 import SwaggerUI from "@fastify/swagger-ui";
 import type { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
-import * as packageJson from "../../../package.json";
 
 /**
  * Swagger documentation generator for Fastify.
@@ -17,7 +16,7 @@ const swaggerGenerator: FastifyPluginAsync = async (
 			info: {
 				title: "Fastify URL Shortener",
 				description: "Fastify URL Shortener documentation",
-				version: packageJson.default.version,
+				version: "1.0.0",
 			},
 			externalDocs: {
 				url: "https://github.com/RicardoValdovinos/fastify-example",
