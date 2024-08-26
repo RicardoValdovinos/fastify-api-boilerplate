@@ -60,3 +60,10 @@ export interface Person {
 export interface DB {
 	Person: Person;
 }
+
+export interface GoogleOAuthUser {
+	id: string;
+	googleId: string;
+	googleEmail: string;
+	googleName: string;
+}

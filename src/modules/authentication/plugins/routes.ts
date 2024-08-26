@@ -6,7 +6,7 @@ import { authInstance } from "../routes/auth.route.js";
 const routePluginWrapper: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstanceTypebox
 ): Promise<void> => {
-	await instance.register(authInstance, { prefix: "/api" });
+	await instance.register(authInstance, { prefix: "/api/auth" });
 };
 
 export default fp(routePluginWrapper, { name: "auth-routes" });
