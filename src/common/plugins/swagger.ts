@@ -45,7 +45,7 @@ const swaggerGenerator: FastifyPluginAsync = async (
 
 	if (instance.config.NODE_ENV !== "production") {
 		await instance.register(SwaggerUI, {
-			routePrefix: "/documentation",
+			routePrefix: "/api/documentation",
 		});
 	}
 };
