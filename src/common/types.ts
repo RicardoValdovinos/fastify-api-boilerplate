@@ -51,19 +51,20 @@ export type FastifyReplyTypebox<TSchema extends FastifySchema> = FastifyReply<
 	TypeBoxTypeProvider
 >;
 
-export interface Person {
-	id: number;
-	name: string | null;
-	age: string | null;
+export interface Session {
+  expires_at: number;
+  id: string;
+  user_id: string;
+}
+
+export interface User {
+  google_email: string | null;
+  google_id: string | null;
+  google_name: string | null;
+  id: string | null;
 }
 
 export interface DB {
-	Person: Person;
-}
-
-export interface GoogleOAuthUser {
-	id: string;
-	googleId: string;
-	googleEmail: string;
-	googleName: string;
+  session: Session;
+  user: User;
 }
