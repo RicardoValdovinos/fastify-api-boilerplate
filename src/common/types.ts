@@ -52,19 +52,19 @@ export type FastifyReplyTypebox<TSchema extends FastifySchema> = FastifyReply<
 >;
 
 export interface Session {
-  expires_at: number;
-  id: string;
-  user_id: string;
+	expires_at: number;
+	id: string;
+	user_id: string;
 }
 
 export interface User {
-  google_email: string;
-  google_id: string;
-  google_name: string;
-  id: string;
+	google_email: string;
+	google_id: string;
+	google_name: string;
+	id: string;
 }
 
 export interface DB {
-  session: Session;
-  user: User;
+	session: Session;
+	user: User;
 }

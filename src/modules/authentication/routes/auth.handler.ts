@@ -105,15 +105,15 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 			(await googleUserResponse.body.json()) as GoogleUserInfoResponse;
 		const googleUser: User = {
 			id: "",
-			'google_id': googleUserInfoResponse.sub,
-			'google_email': googleUserInfoResponse.email,
-			'google_name': googleUserInfoResponse.name,
+			google_id: googleUserInfoResponse.sub,
+			google_email: googleUserInfoResponse.email,
+			google_name: googleUserInfoResponse.name,
 		};
 
-		const existingUser = await instance.database
+		const existingUser = (await instance.database
 			.selectFrom("user")
 			.where("google_id", "=", googleUser.google_id)
-			.executeTakeFirst() as User;
+			.executeTakeFirst()) as User;
 
 		reply.clearCookie("google_oauth_state");
 		reply.clearCookie("code_verifier");
@@ -141,9 +141,9 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 			.insertInto("user")
 			.values({
 				id: googleUser.id,
-				'google_id': googleUser.google_id,
-				'google_email': googleUser.google_email,
-				'google_name': googleUser.google_name,
+				google_id: googleUser.google_id,
+				google_email: googleUser.google_email,
+				google_name: googleUser.google_name,
 			})
 			.execute();
 
