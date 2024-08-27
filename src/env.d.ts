@@ -1,7 +1,8 @@
 import type { Kysely, Sql } from "kysely";
 import type { envSchemaType } from "./configs/env.ts";
-import { lucia } from "./configs/authentication.ts";
-import { Google } from "arctic";
+import type { lucia } from "./configs/authentication.ts";
+import type { Google } from "arctic";
+import type { DB } from "./common/types.ts";
 
 type Auth = {
 	lucia: typeof lucia;

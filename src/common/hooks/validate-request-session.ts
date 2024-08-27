@@ -1,4 +1,4 @@
-import { preHandlerAsyncHookHandler } from "fastify";
+import type { preHandlerAsyncHookHandler } from "fastify";
 
 export const validateRequestSession: preHandlerAsyncHookHandler = async (
 	request,

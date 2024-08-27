@@ -3,11 +3,11 @@ import {
 	generateState,
 	OAuth2RequestError,
 } from "arctic";
-import { RouteHandlerMethod } from "fastify";
+import type { RouteHandlerMethod } from "fastify";
 import { generateIdFromEntropySize } from "lucia";
 import { parseCookies } from "oslo/cookie";
 import { request as undiciRequest } from "undici";
-import { GoogleOAuthUser } from "../../../common/types.js";
+import type { User } from "../../../common/types.js";
 
 type GoogleUserInfoResponse = {
 	sub: string;
@@ -103,17 +103,17 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 		);
 		const googleUserInfoResponse =
 			(await googleUserResponse.body.json()) as GoogleUserInfoResponse;
-		const googleUser: GoogleOAuthUser = {
+		const googleUser: User = {
 			id: "",
-			googleId: googleUserInfoResponse.sub,
-			googleEmail: googleUserInfoResponse.email,
-			googleName: googleUserInfoResponse.name,
+			'google_id': googleUserInfoResponse.sub,
+			'google_email': googleUserInfoResponse.email,
+			'google_name': googleUserInfoResponse.name,
 		};
 
 		const existingUser = await instance.database
 			.selectFrom("user")
-			.where("google_id", "=", googleUser.googleId)
-			.executeTakeFirst();
+			.where("google_id", "=", googleUser.google_id)
+			.executeTakeFirst() as User;
 
 		reply.clearCookie("google_oauth_state");
 		reply.clearCookie("code_verifier");
@@ -131,19 +131,19 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 				sessionCookie.attributes
 			);
 
-			return reply.redirect(referer);
+			return await reply.redirect(referer);
 		}
 
 		const userId = generateIdFromEntropySize(10); // 16 characters long
 		googleUser.id = userId;
 
 		await instance.database
-			.insertInto("GoogleOAuthUser")
+			.insertInto("user")
 			.values({
 				id: googleUser.id,
-				googleId: googleUser.googleId,
-				googleEmail: googleUser.googleEmail,
-				name: googleUser.googleName,
+				'google_id': googleUser.google_id,
+				'google_email': googleUser.google_email,
+				'google_name': googleUser.google_name,
 			})
 			.execute();
 
@@ -155,7 +155,7 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 			sessionCookie.attributes
 		);
 
-		return reply.redirect(referer);
+		return await reply.redirect(referer);
 	} catch (error) {
 		request.log.error(error);
 		if (error instanceof OAuth2RequestError) {
