@@ -58,10 +58,10 @@ export interface Session {
 }
 
 export interface User {
-  google_email: string | null;
-  google_id: string | null;
-  google_name: string | null;
-  id: string | null;
+  google_email: string;
+  google_id: string;
+  google_name: string;
+  id: string;
 }
 
 export interface DB {
