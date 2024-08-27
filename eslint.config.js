@@ -1,9 +1,8 @@
 // @ts-check
-
 import eslintJS from '@eslint/js';
 import typescriptESLintParser from "@typescript-eslint/parser";
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
 import eslintConfigPrettier from 'eslint-config-prettier';
-import * as eslintPluginImport from 'eslint-plugin-import-x';
 import eslintPluginN from 'eslint-plugin-n';
 import eslintPluginSecurity from 'eslint-plugin-security';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
@@ -14,7 +13,7 @@ import {
 } from 'typescript-eslint';
 
 const eslintConfig = typescriptESLintConfig(
-	{ files: ["src/**/*.ts", "test/**/*.ts"] },
+	{ files: ["src/**/*.ts"] },
 	eslintJS.configs.recommended,
 	{
 		name: "base",
@@ -48,13 +47,12 @@ const eslintConfig = typescriptESLintConfig(
 			parser: typescriptESLintParser,
 			parserOptions: {
 				project: "./tsconfig.json",
-				projectService: {
-					defaultProject: "./tsconfig.json",
-					allowDefaultProject: ["eslint.config.js", "commitlint.config.ts", "prettier.config.js", "vitest.config.ts"]
-				},
 				tsconfigRootDir: import.meta.dirname,
 			},
 		},
+		plugins: {
+      '@typescript-eslint': typescriptEslintPlugin,
+    },
 		rules: {
 			"@typescript-eslint/consistent-type-exports": "error",
 			"@typescript-eslint/consistent-type-imports": "error",
@@ -85,26 +83,6 @@ const eslintConfig = typescriptESLintConfig(
 				}
 			],
 		}
-	},
-	{
-		name: "import-x",
-		plugins: { 'import-x': eslintPluginImport },
-		languageOptions: {
-			parserOptions: eslintPluginImport.configs.recommended.parserOptions
-		},
-		settings: {
-			"import-x/parsers": {
-				"@typescript-eslint/parser": [".ts", ".tsx"]
-			},
-			"import-x/resolver": {
-				typescript: {
-					alwaysTryTypes: true,
-					project: "./tsconfig.json",
-				},
-				node: true
-			}
-		},
-		rules: eslintPluginImport.configs.recommended.rules
 	},
 	{
 		name: "unicorn",
