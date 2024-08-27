@@ -10,6 +10,7 @@ import path from "node:path";
 import type { FastifyInstanceTypebox } from "./common/types.js";
 import { getRootDirectory } from "./common/utils.js";
 import { logger } from "./configs/logger.js";
+import 'dotenv/config'
 
 const serverOptions: FastifyServerOptions = {
 	logger,

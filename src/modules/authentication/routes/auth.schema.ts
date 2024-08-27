@@ -1,25 +1,15 @@
-import { type Static, Type } from "@fastify/type-provider-typebox";
+import { Type } from "@fastify/type-provider-typebox";
 import type { FastifySchema } from "fastify";
 
-const GetExamplesResponse = Type.Object({
-	hello: Type.String(),
-});
-export type GetExamplesResponeType = Static<typeof GetExamplesResponse>;
-export const getExamplesSchema = {
-	response: {
-		200: GetExamplesResponse,
-	},
+export const refererQueryString = {
+	querystring: Type.Object({
+		referer: Type.String(),
+	}),
 } satisfies FastifySchema;
 
-const GetExampleByIdResponse = Type.Object({
-	hello: Type.String(),
-});
-export type GetExampleByIdResponeType = Static<typeof GetExampleByIdResponse>;
-export const GetExampleByIdSchema = {
-	params: Type.Object({
-		id: Type.Number(),
+export const stateAndCodeQueryString = {
+	querystring: Type.Object({
+		state: Type.String(),
+		code: Type.String(),
 	}),
-	response: {
-		200: GetExampleByIdResponse,
-	},
 } satisfies FastifySchema;

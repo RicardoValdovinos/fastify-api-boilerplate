@@ -13,8 +13,8 @@ const developmentDebug: FastifyPluginAsyncTypebox = async (
 		return;
 	}
 
-	await instance.register((instance) => {
-		instance.log.info("Example development plugin registered!");
+	await instance.register(async (innerInstance) => {
+		innerInstance.log.info("Example development plugin registered!");
 	});
 };
 

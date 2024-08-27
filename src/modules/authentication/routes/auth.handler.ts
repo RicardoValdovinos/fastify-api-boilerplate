@@ -1,3 +1,4 @@
+import type { CookieSerializeOptions } from "@fastify/csrf-protection";
 import {
 	generateCodeVerifier,
 	generateState,
@@ -7,7 +8,8 @@ import type { RouteHandlerMethod } from "fastify";
 import { generateIdFromEntropySize } from "lucia";
 import { parseCookies } from "oslo/cookie";
 import { request as undiciRequest } from "undici";
-import type { User } from "../../../common/types.js";
+import type { RouteHandlerMethodTypebox, User } from "../../../common/types.js";
+import type { refererQueryString, stateAndCodeQueryString } from "./auth.schema.js";
 
 type GoogleUserInfoResponse = {
 	sub: string;
@@ -20,7 +22,7 @@ type GoogleUserInfoResponse = {
 	hd: string;
 };
 
-export const authGoogle: RouteHandlerMethod = async (
+export const authGoogle: RouteHandlerMethodTypebox<typeof refererQueryString> = async (
 	request,
 	reply
 ): Promise<void> => {
@@ -35,30 +37,26 @@ export const authGoogle: RouteHandlerMethod = async (
 		}
 	);
 
-	reply.cookie("google_oauth_state", state, {
+	const cookieOptions: CookieSerializeOptions = {
 		httpOnly: true,
 		secure: instance.config.NODE_ENV === "production",
 		maxAge: 60 * 10, // 10 minutes
 		path: "/",
-	});
+	}
 
-	reply.cookie("code_verifier", codeVerifier, {
-		httpOnly: true,
-		secure: instance.config.NODE_ENV === "production",
-		maxAge: 60 * 10, // 10 minutes
-		path: "/",
-	});
+	reply.cookie("google_oauth_state", state, cookieOptions);
+	reply.cookie("code_verifier", codeVerifier, cookieOptions);
 
-	const clientUrl = new URL(request.url, "http://placeholder.com"); // don't care about base url. just want params
-	const referer = clientUrl.searchParams.get("referer");
+	const { referer } = request.query
 	if (!referer) {
 		return reply.badRequest("Missing referer search param");
 	}
+	reply.cookie("referer", referer, cookieOptions);
 
-	return reply.redirect(url.toString());
+ 	return reply.redirect(url.toString());
 };
 
-export const authGoogleCallback: RouteHandlerMethod = async (
+export const authGoogleCallback: RouteHandlerMethodTypebox<typeof stateAndCodeQueryString> = async (
 	request,
 	reply
 ): Promise<void> => {
@@ -69,11 +67,8 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 	const codeVerifier = cookies.get("code_verifier") ?? null;
 	const referer = cookies.get("referer") ?? null;
 
-	const url = new URL(request.url);
-	const state = url.searchParams.get("state");
-	const code = url.searchParams.get("code");
-
 	// verify state
+	const {state, code} = request.query
 	if (
 		!state ||
 		!stateCookie ||
@@ -105,14 +100,15 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 			(await googleUserResponse.body.json()) as GoogleUserInfoResponse;
 		const googleUser: User = {
 			id: "",
-			google_id: googleUserInfoResponse.sub,
-			google_email: googleUserInfoResponse.email,
-			google_name: googleUserInfoResponse.name,
+			'google_id': googleUserInfoResponse.sub,
+			'google_email': googleUserInfoResponse.email,
+			'google_name': googleUserInfoResponse.name,
 		};
 
 		const existingUser = (await instance.database
 			.selectFrom("user")
 			.where("google_id", "=", googleUser.google_id)
+			.selectAll()
 			.executeTakeFirst()) as User;
 
 		reply.clearCookie("google_oauth_state");
@@ -141,9 +137,9 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 			.insertInto("user")
 			.values({
 				id: googleUser.id,
-				google_id: googleUser.google_id,
-				google_email: googleUser.google_email,
-				google_name: googleUser.google_name,
+				'google_id': googleUser.google_id,
+				'google_email': googleUser.google_email,
+				'google_name': googleUser.google_name,
 			})
 			.execute();
 
@@ -165,13 +161,11 @@ export const authGoogleCallback: RouteHandlerMethod = async (
 	}
 };
 
-export const logout: RouteHandlerMethod = async (request, reply) => {
+export const logout: RouteHandlerMethodTypebox<typeof refererQueryString> = async (request, reply) => {
 	const { server: instance } = request;
 	const { auth_session: sessionId } = request.cookies;
 
-	const clientUrl = new URL(request.url, "http://placeholder.com");
-	const referer = clientUrl.searchParams.get("referer");
-
+	const {referer} = request.query
 	if (!referer) {
 		return reply.badRequest("Missing referer search param");
 	}
