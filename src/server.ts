@@ -1,6 +1,7 @@
 import Autoload from "@fastify/autoload";
 import type { TypeBoxTypeProvider } from "@fastify/type-provider-typebox";
 import closeWithGrace from "close-with-grace";
+import "dotenv/config";
 import {
 	fastify,
 	type FastifyListenOptions,
@@ -8,9 +9,7 @@ import {
 } from "fastify";
 import path from "node:path";
 import type { FastifyInstanceTypebox } from "./common/types.js";
-import { getRootDirectory } from "./common/utils.js";
 import { logger } from "./configs/logger.js";
-import 'dotenv/config'
 
 const serverOptions: FastifyServerOptions = {
 	logger,
@@ -20,10 +19,10 @@ const server: FastifyInstanceTypebox =
 	fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
 await server.register(Autoload, {
-	dir: path.join(getRootDirectory(), path.normalize("src/common/plugins")),
+	dir: path.normalize(path.join("common/plugins")),
 });
 await server.register(Autoload, {
-	dir: path.join(getRootDirectory(), path.normalize("src/modules/")),
+	dir: path.normalize(path.join("modules")),
 	matchFilter: "plugins",
 });
 

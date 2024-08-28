@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { dirname } from "node:path";
+import path, { dirname } from "node:path";
+import { fileURLToPath } from "node:url";
 
 export const runOnlyInDevelopment = (
 	environment: FastifyInstance["config"]["NODE_ENV"],
@@ -27,3 +28,6 @@ export const getRootDirectory = (): string => {
 	);
 	return root;
 };
+
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
