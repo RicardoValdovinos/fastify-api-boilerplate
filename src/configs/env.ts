@@ -11,6 +11,7 @@ export const envSchema = Type.Object({
 	GOOGLE_CLIENT_ID: Type.String(),
 	GOOGLE_CLIENT_SECRET: Type.String(),
 	GOOGLE_REDIRECT_URI: Type.String(),
+	ALLOWED_ORIGINS: Type.String(),
 });
 
 export type envSchemaType = Static<typeof envSchema>;
