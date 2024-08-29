@@ -14,12 +14,12 @@ const swaggerGenerator: FastifyPluginAsync = async (
 	const swaggerOptions: SwaggerOptions = {
 		swagger: {
 			info: {
-				title: "Fastify URL Shortener",
-				description: "Fastify URL Shortener documentation",
+				title: "Fastify API Boilerplate",
+				description: "Fastify API Boilerplate documentation",
 				version: "1.0.0",
 			},
 			externalDocs: {
-				url: "https://github.com/RicardoValdovinos/fastify-example",
+				url: "https://github.com/RicardoValdovinos/Fastify API Boilerplate",
 				description: "Find more info here",
 			},
 			host: "localhost",
@@ -27,16 +27,7 @@ const swaggerGenerator: FastifyPluginAsync = async (
 			consumes: ["application/json"],
 			produces: ["application/json", "text/html"],
 			securityDefinitions: {
-				Bearer: {
-					type: "apiKey",
-					name: "Bearer",
-					in: "header",
-				},
-				Csrf: {
-					type: "apiKey",
-					name: "x-csrf-token",
-					in: "header",
-				},
+				
 			},
 		},
 	};
