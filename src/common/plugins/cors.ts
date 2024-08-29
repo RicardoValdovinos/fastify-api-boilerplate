@@ -7,7 +7,7 @@ const cors: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {
 	await instance.register(Cors, {
-		origin: instance.config.ALLOWED_ORIGINS.split(""),
+		origin: instance.config.ALLOWED_ORIGINS.split(" "),
 		credentials: true,
 	});
 };
