@@ -1,6 +1,6 @@
 import type { FastifyServerOptions } from "fastify";
 import path, { normalize } from "node:path";
-import { getRootDirectory } from "../common/utils.js";
+import { fileURLToPath } from "node:url";
 
 type LoggerOptions = NonNullable<FastifyServerOptions["logger"]>;
 
@@ -12,7 +12,10 @@ type LoggerTransportSingleOptions = Extract<
 	{ target: string }
 >;
 
-const logsDirectory = path.join(getRootDirectory(), "logs");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const logsDirectory = path.join(__dirname, "logs");
 const logFileName = new Date().toISOString();
 const logPath = normalize(path.join(logsDirectory, logFileName));
 

@@ -8,6 +8,7 @@ import {
 	type FastifyServerOptions,
 } from "fastify";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import type { FastifyInstanceTypebox } from "./common/types.js";
 import { logger } from "./configs/logger.js";
 
@@ -18,11 +19,14 @@ const serverOptions: FastifyServerOptions = {
 const server: FastifyInstanceTypebox =
 	fastify(serverOptions).withTypeProvider<TypeBoxTypeProvider>();
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 await server.register(Autoload, {
-	dir: path.normalize(path.join("common/plugins")),
+	dir: path.normalize(path.join(__dirname, "common/plugins")),
 });
 await server.register(Autoload, {
-	dir: path.normalize(path.join("modules")),
+	dir: path.normalize(path.join(__dirname, "modules")),
 	matchFilter: "plugins",
 });
 
