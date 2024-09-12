@@ -10,8 +10,9 @@ const routePluginWrapper: FastifyPluginAsyncTypebox = async (
 	const innerPlugin: FastifyPluginAsyncTypebox = async (
 		innerInstance: FastifyInstanceTypebox
 	): Promise<void> => {
-		await innerInstance.register(exampleInstance, { prefix: "/api/example" });
 		innerInstance.addHook("preHandler", validateRequestSession);
+		
+		await innerInstance.register(exampleInstance, { prefix: "/api/example" });
 	};
 
 	instance.register(innerPlugin);
