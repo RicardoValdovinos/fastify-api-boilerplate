@@ -3,11 +3,6 @@ import SwaggerUI from "@fastify/swagger-ui";
 import type { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
 
-/**
- * Swagger documentation generator for Fastify.
- * It uses the schemas you declare in your routes to generate a swagger compliant doc.
- * https://github.com/fastify/fastify-swagger
- */
 const swaggerGenerator: FastifyPluginAsync = async (
 	instance: FastifyInstance
 ) => {
