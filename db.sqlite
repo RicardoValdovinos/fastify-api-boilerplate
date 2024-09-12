@@ -11,3 +11,44 @@ CREATE TABLE IF NOT EXISTS session (
   expires_at INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+CREATE TABLE IF NOT EXISTS person (
+  id INTEGER NOT NULL PRIMARY KEY,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  phone TEXT,
+  address TEXT,
+  date_added DATETIME NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS species (
+  id INTEGER NOT NULL PRIMARY KEY,
+  name TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS pet (
+  person_id INTEGER NOT NULL,
+  species_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  age INTEGER,
+  date_added DATETIME NOT NULL,
+  FOREIGN KEY(person_id) REFERENCES person(id),
+  FOREIGN KEY(species_id) REFERENCES species(id)
+);
+
+INSERT INTO person(id, first_name, last_name, email, phone, address, date_added) VALUES (NULL, 'darlene', 'hawkins', 'darlene.hawkins@example.com', '9145555555', '1234 e 132st', DATETIME('now'));
+INSERT INTO person(id, first_name, last_name, email, phone, address, date_added) VALUES (NULL, 'john', 'williamson', 'johnnyw23@example.com', NULL, NULL, DATETIME('now'));
+INSERT INTO person(id, first_name, last_name, email, phone, address, date_added) VALUES (NULL, 'jessica', 'gerkin', 'jger1983@example.com', '2135553120', NULL, DATETIME('now'));
+INSERT INTO person(id, first_name, last_name, email, phone, address, date_added) VALUES (NULL, 'ana', 'binden', 'anabanana19@example.com', NULL, '8765 w ocean blvd', DATETIME('now'));
+
+INSERT INTO species(id, name) VALUES (NULL, 'dog');
+INSERT INTO species(id, name) VALUES (NULL, 'cat');
+INSERT INTO species(id, name) VALUES (NULL, 'bird');
+INSERT INTO species(id, name) VALUES (NULL, 'reptile');
+
+INSERT INTO pet(person_id, species_id, name, age, date_added) VALUES (1, 2, 'fluffy', 2, DATETIME('now'));
+INSERT INTO pet(person_id, species_id, name, age, date_added) VALUES (1, 2, 'oreo', 2, DATETIME('now'));
+INSERT INTO pet(person_id, species_id, name, age, date_added) VALUES (3, 4, 'chirp', 5, DATETIME('now'));
+INSERT INTO pet(person_id, species_id, name, age, date_added) VALUES (3, 3, 'dr doom', 1, DATETIME('now'));
+INSERT INTO pet(person_id, species_id, name, age, date_added) VALUES (4, 1, 'augustus boop', 7, DATETIME('now'));
