@@ -51,20 +51,48 @@ export type FastifyReplyTypebox<TSchema extends FastifySchema> = FastifyReply<
 	TypeBoxTypeProvider
 >;
 
+export interface Person {
+  address: string | null;
+  date_added: string;
+  email: string;
+  first_name: string;
+  id: number;
+  last_name: string;
+  phone: string | null;
+}
+
+export interface Pet {
+  age: number | null;
+  date_added: string;
+  id: number;
+  name: string;
+  person_id: number;
+  species_id: number;
+}
+
 export interface Session {
-	expires_at: number;
-	id: string;
-	user_id: string;
+  expires_at: number;
+  id: string;
+  user_id: string;
+}
+
+export interface Species {
+  id: number;
+  name: string;
 }
 
 export interface User {
-	google_email: string;
-	google_id: string;
-	google_name: string;
-	id: string;
+  google_email: string | null;
+  google_id: string | null;
+  google_name: string | null;
+  id: string | null;
 }
 
 export interface DB {
-	session: Session;
-	user: User;
+  person: Person;
+  pet: Pet;
+  session: Session;
+  species: Species;
+  user: User;
 }
+
