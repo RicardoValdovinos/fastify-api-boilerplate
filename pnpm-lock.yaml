@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@auth/core':
         specifier: ^0.34.2
-        version: 0.34.2
+        version: 0.34.2(nodemailer@6.9.15)
       '@fastify/autoload':
         specifier: ^5.10.0
         version: 5.10.0
@@ -77,6 +77,9 @@ importers:
       lucia:
         specifier: ^3.2.0
         version: 3.2.0
+      nodemailer:
+        specifier: ^6.9.15
+        version: 6.9.15
       oslo:
         specifier: ^1.2.1
         version: 1.2.1
@@ -2534,6 +2537,10 @@ packages:
   node-releases@2.0.18:
     resolution: {integrity: sha512-d9VeXT4SJ7ZeOqGX6R5EM022wpL+eWPooLI+5UpWn2jCT1aosUQEhQP214x33Wkwx3JQMvIm+tIoVOdodFS40g==}
 
+  nodemailer@6.9.15:
+    resolution: {integrity: sha512-AHf04ySLC6CIfuRtRiEYtGEXgRfa6INgWGluDhnxTZhHSKvrBu7lc1VVchQ0d8nPc4cFaZoPq8vkyNoZr0TpGQ==}
+    engines: {node: '>=6.0.0'}
+
   normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
 
@@ -3424,7 +3431,7 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@auth/core@0.34.2':
+  '@auth/core@0.34.2(nodemailer@6.9.15)':
     dependencies:
       '@panva/hkdf': 1.2.1
       '@types/cookie': 0.6.0
@@ -3433,6 +3440,8 @@ snapshots:
       oauth4webapi: 2.12.0
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
+    optionalDependencies:
+      nodemailer: 6.9.15
 
   '@babel/code-frame@7.24.7':
     dependencies:
@@ -5805,6 +5814,8 @@ snapshots:
       semver: 7.6.3
 
   node-releases@2.0.18: {}
+
+  nodemailer@6.9.15: {}
 
   normalize-package-data@2.5.0:
     dependencies:
