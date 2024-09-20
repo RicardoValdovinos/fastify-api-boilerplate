@@ -6,6 +6,7 @@ import fp from "fastify-plugin";
 const swaggerGenerator: FastifyPluginAsync = async (
 	instance: FastifyInstance
 ) => {
+	// https://github.com/fastify/fastify-swagger
 	const swaggerOptions: SwaggerOptions = {
 		swagger: {
 			info: {
