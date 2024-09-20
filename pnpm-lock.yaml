@@ -35,6 +35,9 @@ importers:
       '@fastify/multipart':
         specifier: ^8.3.0
         version: 8.3.0
+      '@fastify/rate-limit':
+        specifier: ^10.0.0
+        version: 10.0.0
       '@fastify/sensible':
         specifier: ^5.6.0
         version: 5.6.0
@@ -77,9 +80,6 @@ importers:
       lucia:
         specifier: ^3.2.0
         version: 3.2.0
-      nodemailer:
-        specifier: ^6.9.15
-        version: 6.9.15
       oslo:
         specifier: ^1.2.1
         version: 1.2.1
@@ -643,6 +643,9 @@ packages:
 
   '@fastify/multipart@8.3.0':
     resolution: {integrity: sha512-A8h80TTyqUzaMVH0Cr9Qcm6RxSkVqmhK/MVBYHYeRRSUbUYv08WecjWKSlG2aSnD4aGI841pVxAjC+G1GafUeQ==}
+
+  '@fastify/rate-limit@10.0.0':
+    resolution: {integrity: sha512-tgWgUw/Zvs0GfV5odyr4g/CMiNamWYi0eMrmidPTIJyr1Ea3W42YqvM/jpbVjuKC6HONRVUq+IZbAy+GtixVGg==}
 
   '@fastify/send@2.1.0':
     resolution: {integrity: sha512-yNYiY6sDkexoJR0D8IDy3aRP3+L4wdqCpvx5WP+VtEU58sn7USmKynBzDQex5X42Zzvw2gNzzYgP90UfWShLFA==}
@@ -1818,6 +1821,9 @@ packages:
 
   fastify-plugin@4.5.1:
     resolution: {integrity: sha512-stRHYGeuqpEZTL1Ef0Ovr2ltazUT9g844X5z/zEBFLG8RYlpDiOCIG+ATvYEp+/zmc7sN29mcIMp8gvYplYPIQ==}
+
+  fastify-plugin@5.0.0:
+    resolution: {integrity: sha512-0725fmH/yYi8ugsjszLci+lLnGBK6cG+WSxM7edY2OXJEU7gr2JiGBoieL2h9mhTych1vFsEfXsAsGGDJ/Rd5w==}
 
   fastify@4.28.1:
     resolution: {integrity: sha512-kFWUtpNr4i7t5vY2EJPCN2KgMVpuqfU4NjnJNCgiNB900oiDeYqaNDRcAfeBbOF5hGixixxcKnOU4KN9z6QncQ==}
@@ -3822,6 +3828,12 @@ snapshots:
       secure-json-parse: 2.7.0
       stream-wormhole: 1.1.0
 
+  '@fastify/rate-limit@10.0.0':
+    dependencies:
+      '@lukeed/ms': 2.0.2
+      fastify-plugin: 5.0.0
+      toad-cache: 3.7.0
+
   '@fastify/send@2.1.0':
     dependencies:
       '@lukeed/ms': 2.0.2
@@ -5144,6 +5156,8 @@ snapshots:
 
   fastify-plugin@4.5.1: {}
 
+  fastify-plugin@5.0.0: {}
+
   fastify@4.28.1:
     dependencies:
       '@fastify/ajv-compiler': 3.6.0
@@ -5815,7 +5829,8 @@ snapshots:
 
   node-releases@2.0.18: {}
 
-  nodemailer@6.9.15: {}
+  nodemailer@6.9.15:
+    optional: true
 
   normalize-package-data@2.5.0:
     dependencies:
