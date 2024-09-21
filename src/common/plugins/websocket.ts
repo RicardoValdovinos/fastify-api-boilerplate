@@ -17,7 +17,6 @@ const websocket: FastifyPluginAsyncTypebox = async (
 		handleProtocols: undefined,
 		host: undefined,
 		maxPayload: 104857600,
-		noServer: false,
 		perMessageDeflate: true,
 		// port: undefined, // One and only one of the "port", "server", or "noServer" options must be specified
 		// server: undefined, // One and only one of the "port", "server", or "noServer" options must be specified
