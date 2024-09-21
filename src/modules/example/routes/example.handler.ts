@@ -24,7 +24,7 @@ type GetPersonsType = typeof getPersonsSchema;
 export const getPersons: RouteHandlerMethodTypebox<GetPersonsType> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetPersonsType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetPersonsType["response"]["2xx"]> => {
 	reply.header("Content-Type", "application/json; charset=utf-8");
 
 	const { database } = request.server;
@@ -39,7 +39,7 @@ export const getPersonById: RouteHandlerMethodTypebox<
 > = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetPersonByIdType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetPersonByIdType["response"]["2xx"]> => {
 	reply.header("Content-Type", "application/json; charset=utf-8");
 	const { id } = request.params;
 
@@ -61,7 +61,7 @@ type GetSpeciesType = typeof getSpeciesSchema;
 export const getSpecies: RouteHandlerMethodTypebox<GetSpeciesType> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetSpeciesType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetSpeciesType["response"]["2xx"]> => {
 	reply.header("Content-Type", "application/json; charset=utf-8");
 
 	const { database } = request.server;
@@ -76,7 +76,7 @@ export const getSpeciesById: RouteHandlerMethodTypebox<
 > = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetSpeciesByIdType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetSpeciesByIdType["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
@@ -97,7 +97,7 @@ type GetPetsType = typeof getPetsSchema;
 export const getPets: RouteHandlerMethodTypebox<GetPetsType> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetPetsType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetPetsType["response"]["2xx"]> => {
 	reply.header("Content-Type", "application/json; charset=utf-8");
 
 	const { database } = request.server;
@@ -110,7 +110,7 @@ type GetPetsByIdType = typeof getPetsByIdSchema;
 export const getPetById: RouteHandlerMethodTypebox<GetPetsByIdType> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetPetsByIdType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetPetsByIdType["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
@@ -133,7 +133,7 @@ export const getPetsByPerson: RouteHandlerMethodTypebox<
 > = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetPetsByPersonType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetPetsByPersonType["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
@@ -153,7 +153,7 @@ export const getPetsBySpecies: RouteHandlerMethodTypebox<
 > = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<GetPetsBySpeciesType["response"]> => {
+): RouteHandlerMethodTypeboxReturn<GetPetsBySpeciesType["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
@@ -171,7 +171,7 @@ type AddPersonSchema = typeof addPersonSchema;
 export const addPerson: RouteHandlerMethodTypebox<AddPersonSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<AddPersonSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<AddPersonSchema["response"]["2xx"]> => {
 	const { id, email, firstName, lastName, address, phone, dateAdded } =
 		request.body;
 
@@ -194,7 +194,7 @@ type AddSpeciesSchema = typeof addSpeciesSchema;
 export const addSpecies: RouteHandlerMethodTypebox<AddSpeciesSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<AddSpeciesSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<AddSpeciesSchema["response"]["2xx"]> => {
 	const { id, name } = request.body;
 
 	const { database } = request.server;
@@ -216,7 +216,7 @@ type AddPetsSchema = typeof addPetsSchema;
 export const addPet: RouteHandlerMethodTypebox<AddPetsSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<AddPetsSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<AddPetsSchema["response"]["2xx"]> => {
 	const { id, name, age, personId, speciesId, dateAdded } = request.body;
 
 	const { database } = request.server;
@@ -240,7 +240,7 @@ export const updatePerson: RouteHandlerMethodTypebox<
 > = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<UpdatePersonSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<UpdatePersonSchema["response"]["2xx"]> => {
 	const {
 		id: bodyId,
 		email,
@@ -274,7 +274,7 @@ export const updateSpecies: RouteHandlerMethodTypebox<
 > = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<UpdateSpeciesSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<UpdateSpeciesSchema["response"]["2xx"]> => {
 	const { id: bodyId, name } = request.body;
 	const { id } = request.params;
 
@@ -298,7 +298,7 @@ type UpdatePetSchema = typeof updatePetsSchema;
 export const updatePet: RouteHandlerMethodTypebox<UpdatePetSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<UpdatePetSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<UpdatePetSchema["response"]["2xx"]> => {
 	const {
 		id: bodyId,
 		name,
@@ -330,7 +330,7 @@ type DeleteSchema = typeof deleteSchema;
 export const deletePerson: RouteHandlerMethodTypebox<DeleteSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<DeleteSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<DeleteSchema["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
@@ -343,7 +343,7 @@ export const deletePerson: RouteHandlerMethodTypebox<DeleteSchema> = async (
 export const deletePet: RouteHandlerMethodTypebox<DeleteSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<DeleteSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<DeleteSchema["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
@@ -356,7 +356,7 @@ export const deletePet: RouteHandlerMethodTypebox<DeleteSchema> = async (
 export const deleteSpecies: RouteHandlerMethodTypebox<DeleteSchema> = async (
 	request,
 	reply
-): RouteHandlerMethodTypeboxReturn<DeleteSchema["response"]> => {
+): RouteHandlerMethodTypeboxReturn<DeleteSchema["response"]["2xx"]> => {
 	const { id } = request.params;
 
 	const { database } = request.server;
