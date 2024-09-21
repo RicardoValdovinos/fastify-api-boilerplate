@@ -2,8 +2,27 @@ import { Type } from "@sinclair/typebox";
 import type { FastifySchema } from "fastify";
 
 export const getPersonsSchema = {
-	response: {'2xx': Type.Array(
-		Type.Object({
+	response: {
+		"2xx": Type.Array(
+			Type.Object({
+				address: Type.Union([Type.String(), Type.Null()]),
+				dateAdded: Type.String(),
+				email: Type.String(),
+				firstName: Type.String(),
+				id: Type.Number(),
+				lastName: Type.String(),
+				phone: Type.Union([Type.String(), Type.Null()]),
+			})
+		),
+	},
+} satisfies FastifySchema;
+
+export const getPersonByIdSchema = {
+	params: Type.Object({
+		id: Type.Number(),
+	}),
+	response: {
+		"2xx": Type.Object({
 			address: Type.Union([Type.String(), Type.Null()]),
 			dateAdded: Type.String(),
 			email: Type.String(),
@@ -11,101 +30,98 @@ export const getPersonsSchema = {
 			id: Type.Number(),
 			lastName: Type.String(),
 			phone: Type.Union([Type.String(), Type.Null()]),
-		})
-	)},
-} satisfies FastifySchema;
-
-export const getPersonByIdSchema = {
-	params: Type.Object({
-		id: Type.Number(),
-	}),
-	response: {'2xx': Type.Object({
-		address: Type.Union([Type.String(), Type.Null()]),
-		dateAdded: Type.String(),
-		email: Type.String(),
-		firstName: Type.String(),
-		id: Type.Number(),
-		lastName: Type.String(),
-		phone: Type.Union([Type.String(), Type.Null()]),
-	})},
+		}),
+	},
 } satisfies FastifySchema;
 
 export const getSpeciesSchema = {
-	response: {'2xx':Type.Array(
-		Type.Object({
-			id: Type.Number(),
-			name: Type.String(),
-		})
-	)},
+	response: {
+		"2xx": Type.Array(
+			Type.Object({
+				id: Type.Number(),
+				name: Type.String(),
+			})
+		),
+	},
 } satisfies FastifySchema;
 
 export const getSpeciesByIdSchema = {
 	params: Type.Object({
 		id: Type.Number(),
 	}),
-	response: {'2xx':Type.Object({
-		id: Type.Number(),
-		name: Type.String(),
-	})},
+	response: {
+		"2xx": Type.Object({
+			id: Type.Number(),
+			name: Type.String(),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const getPetsSchema = {
-	response: {'2xx': Type.Array(
-		Type.Object({
-			dateAdded: Type.String(),
-			id: Type.Number(),
-			age: Type.Union([Type.Number(), Type.Null()]),
-			name: Type.String(),
-			personId: Type.Number(),
-			speciesId: Type.Number(),
-		})
-	)},
+	response: {
+		"2xx": Type.Array(
+			Type.Object({
+				dateAdded: Type.String(),
+				id: Type.Number(),
+				age: Type.Union([Type.Number(), Type.Null()]),
+				name: Type.String(),
+				personId: Type.Number(),
+				speciesId: Type.Number(),
+			})
+		),
+	},
 } satisfies FastifySchema;
 
 export const getPetsByIdSchema = {
 	params: Type.Object({
 		id: Type.Number(),
 	}),
-	response: {'2xx': Type.Object({
-		dateAdded: Type.String(),
-		id: Type.Number(),
-		age: Type.Union([Type.Number(), Type.Null()]),
-		name: Type.String(),
-		personId: Type.Number(),
-		speciesId: Type.Number(),
-	})},
+	response: {
+		"2xx": Type.Object({
+			dateAdded: Type.String(),
+			id: Type.Number(),
+			age: Type.Union([Type.Number(), Type.Null()]),
+			name: Type.String(),
+			personId: Type.Number(),
+			speciesId: Type.Number(),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const getPetsByPersonSchema = {
 	params: Type.Object({
 		id: Type.Number(),
 	}),
-	response: {'2xx': Type.Array(
-		Type.Object({
-			dateAdded: Type.String(),
-			id: Type.Number(),
-			age: Type.Union([Type.Number(), Type.Null()]),
-			name: Type.String(),
-			personId: Type.Number(),
-			speciesId: Type.Number(),
-		})
-	)},
+	response: {
+		"2xx": Type.Array(
+			Type.Object({
+				dateAdded: Type.String(),
+				id: Type.Number(),
+				age: Type.Union([Type.Number(), Type.Null()]),
+				name: Type.String(),
+				personId: Type.Number(),
+				speciesId: Type.Number(),
+			})
+		),
+	},
 } satisfies FastifySchema;
 
 export const getPetsBySpeciesSchema = {
 	params: Type.Object({
 		id: Type.Number(),
 	}),
-	response: {'2xx': Type.Array(
-		Type.Object({
-			dateAdded: Type.String(),
-			id: Type.Number(),
-			age: Type.Union([Type.Number(), Type.Null()]),
-			name: Type.String(),
-			personId: Type.Number(),
-			speciesId: Type.Number(),
-		})
-	)},
+	response: {
+		"2xx": Type.Array(
+			Type.Object({
+				dateAdded: Type.String(),
+				id: Type.Number(),
+				age: Type.Union([Type.Number(), Type.Null()]),
+				name: Type.String(),
+				personId: Type.Number(),
+				speciesId: Type.Number(),
+			})
+		),
+	},
 } satisfies FastifySchema;
 
 export const addPersonSchema = {
@@ -118,15 +134,17 @@ export const addPersonSchema = {
 		lastName: Type.String(),
 		phone: Type.Union([Type.String(), Type.Null()]),
 	}),
-	response: {'2xx':Type.Object({
-		address: Type.Union([Type.String(), Type.Null()]),
-		dateAdded: Type.String(),
-		email: Type.String(),
-		firstName: Type.String(),
-		id: Type.Number(),
-		lastName: Type.String(),
-		phone: Type.Union([Type.String(), Type.Null()]),
-	})},
+	response: {
+		"2xx": Type.Object({
+			address: Type.Union([Type.String(), Type.Null()]),
+			dateAdded: Type.String(),
+			email: Type.String(),
+			firstName: Type.String(),
+			id: Type.Number(),
+			lastName: Type.String(),
+			phone: Type.Union([Type.String(), Type.Null()]),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const addSpeciesSchema = {
@@ -134,10 +152,12 @@ export const addSpeciesSchema = {
 		id: Type.Number(),
 		name: Type.String(),
 	}),
-	response: {'2xx': Type.Object({
-		id: Type.Number(),
-		name: Type.String(),
-	})},
+	response: {
+		"2xx": Type.Object({
+			id: Type.Number(),
+			name: Type.String(),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const addPetsSchema = {
@@ -149,14 +169,16 @@ export const addPetsSchema = {
 		personId: Type.Number(),
 		speciesId: Type.Number(),
 	}),
-	response: {'2xx':Type.Object({
-		dateAdded: Type.String(),
-		id: Type.Number(),
-		age: Type.Union([Type.Number(), Type.Null()]),
-		name: Type.String(),
-		personId: Type.Number(),
-		speciesId: Type.Number(),
-	})},
+	response: {
+		"2xx": Type.Object({
+			dateAdded: Type.String(),
+			id: Type.Number(),
+			age: Type.Union([Type.Number(), Type.Null()]),
+			name: Type.String(),
+			personId: Type.Number(),
+			speciesId: Type.Number(),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const updatePersonSchema = {
@@ -172,15 +194,17 @@ export const updatePersonSchema = {
 		lastName: Type.String(),
 		phone: Type.Union([Type.String(), Type.Null()]),
 	}),
-	response: {'2xx': Type.Object({
-		address: Type.Union([Type.String(), Type.Null()]),
-		dateAdded: Type.String(),
-		email: Type.String(),
-		firstName: Type.String(),
-		id: Type.Number(),
-		lastName: Type.String(),
-		phone: Type.Union([Type.String(), Type.Null()]),
-	})},
+	response: {
+		"2xx": Type.Object({
+			address: Type.Union([Type.String(), Type.Null()]),
+			dateAdded: Type.String(),
+			email: Type.String(),
+			firstName: Type.String(),
+			id: Type.Number(),
+			lastName: Type.String(),
+			phone: Type.Union([Type.String(), Type.Null()]),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const updateSpeciesSchema = {
@@ -191,10 +215,12 @@ export const updateSpeciesSchema = {
 		id: Type.Number(),
 		name: Type.String(),
 	}),
-	response: {'2xx': Type.Object({
-		id: Type.Number(),
-		name: Type.String(),
-	})},
+	response: {
+		"2xx": Type.Object({
+			id: Type.Number(),
+			name: Type.String(),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const updatePetsSchema = {
@@ -209,19 +235,21 @@ export const updatePetsSchema = {
 		personId: Type.Number(),
 		speciesId: Type.Number(),
 	}),
-	response: {'2xx': Type.Object({
-		dateAdded: Type.String(),
-		id: Type.Number(),
-		age: Type.Union([Type.Number(), Type.Null()]),
-		name: Type.String(),
-		personId: Type.Number(),
-		speciesId: Type.Number(),
-	})},
+	response: {
+		"2xx": Type.Object({
+			dateAdded: Type.String(),
+			id: Type.Number(),
+			age: Type.Union([Type.Number(), Type.Null()]),
+			name: Type.String(),
+			personId: Type.Number(),
+			speciesId: Type.Number(),
+		}),
+	},
 } satisfies FastifySchema;
 
 export const deleteSchema = {
 	params: Type.Object({
 		id: Type.Number(),
 	}),
-	response: {'2xx': Type.Object({})},
+	response: { "2xx": Type.Object({}) },
 } satisfies FastifySchema;
