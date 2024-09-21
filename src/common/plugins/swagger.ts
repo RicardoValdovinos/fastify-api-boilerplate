@@ -24,9 +24,7 @@ const swaggerGenerator: FastifyPluginAsync = async (
 			schemes: ["http", "https"],
 			consumes: ["application/json"],
 			produces: ["application/json", "text/html"],
-			securityDefinitions: {
-				
-			},
+			securityDefinitions: {},
 		},
 	};
 

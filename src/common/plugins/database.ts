@@ -8,7 +8,7 @@ import { kysely } from "../../configs/database.js";
  * https://github.com/kysely-org/kysely
  */
 const database: FastifyPluginAsyncTypebox = async (
-	instance: FastifyInstance,
+	instance: FastifyInstance
 ): Promise<void> => {
 	instance.decorate("database", kysely);
 	instance.decorate("sql", sql);

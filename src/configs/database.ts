@@ -8,9 +8,7 @@ const dialect = new SqliteDialect({
 	database: sqlite,
 });
 
-export const kysely = new Kysely<DB>({ 
-	dialect, 
-	plugins: [
-		new CamelCasePlugin()
-	] 
+export const kysely = new Kysely<DB>({
+	dialect,
+	plugins: [new CamelCasePlugin()],
 });

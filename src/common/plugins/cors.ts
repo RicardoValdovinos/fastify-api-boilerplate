@@ -4,15 +4,15 @@ import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
 /**
- * https://github.com/fastify/fastify-cors 
+ * https://github.com/fastify/fastify-cors
  */
 const cors: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {
 	const defaultCorsOptions: FastifyCorsOptions = {
 		origin: instance.config.ALLOWED_ORIGINS.split(" "),
-		methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],
-		hook: 'onRequest',
+		methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+		hook: "onRequest",
 		preflightContinue: false,
 		optionsSuccessStatus: 204,
 		credentials: true,
@@ -20,8 +20,8 @@ const cors: FastifyPluginAsyncTypebox = async (
 		allowedHeaders: undefined,
 		maxAge: undefined,
 		preflight: false,
-		strictPreflight: true
-	}
+		strictPreflight: true,
+	};
 
 	await instance.register(FastifyCors, defaultCorsOptions);
 };

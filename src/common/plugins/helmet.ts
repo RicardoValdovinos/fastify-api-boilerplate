@@ -4,7 +4,7 @@ import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 /**
  * https://github.com/fastify/fastify-helmet
- * https://helmetjs.github.io/ 
+ * https://helmetjs.github.io/
  */
 const helmet: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
@@ -25,20 +25,20 @@ const helmet: FastifyPluginAsyncTypebox = async (
 				"upgrade-insecure-requests": [],
 			},
 			reportOnly: false,
-			useDefaults: true
+			useDefaults: true,
 		},
 		crossOriginEmbedderPolicy: {
-			policy: "require-corp"
+			policy: "require-corp",
 		},
 		crossOriginOpenerPolicy: {
-			policy: "same-origin"
+			policy: "same-origin",
 		},
 		crossOriginResourcePolicy: {
-			policy: "same-origin"
+			policy: "same-origin",
 		},
 		originAgentCluster: true,
 		referrerPolicy: {
-			policy: "no-referrer"
+			policy: "no-referrer",
 		},
 		strictTransportSecurity: {
 			includeSubDomains: true,
@@ -47,18 +47,18 @@ const helmet: FastifyPluginAsyncTypebox = async (
 		},
 		xContentTypeOptions: true,
 		xDnsPrefetchControl: {
-			allow: false
+			allow: false,
 		},
 		xDownloadOptions: true,
 		xFrameOptions: {
-			action: "sameorigin"
+			action: "sameorigin",
 		},
 		xPermittedCrossDomainPolicies: {
-			permittedPolicies: "none"
+			permittedPolicies: "none",
 		},
 		xPoweredBy: false,
 		xXssProtection: false,
-	}
+	};
 
 	await instance.register(Helmet, defaultHelmetOptions);
 };

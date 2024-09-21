@@ -9,7 +9,10 @@ import { generateIdFromEntropySize } from "lucia";
 import { parseCookies } from "oslo/cookie";
 import { request as undiciRequest } from "undici";
 import type { RouteHandlerMethodTypebox, User } from "../../../common/types.js";
-import type { refererQueryString, stateAndCodeQueryString } from "./auth.schema.js";
+import type {
+	refererQueryString,
+	stateAndCodeQueryString,
+} from "./auth.schema.js";
 
 type GoogleUserInfoResponse = {
 	sub: string;
@@ -22,10 +25,9 @@ type GoogleUserInfoResponse = {
 	hd: string;
 };
 
-export const authGoogle: RouteHandlerMethodTypebox<typeof refererQueryString> = async (
-	request,
-	reply
-): Promise<void> => {
+export const authGoogle: RouteHandlerMethodTypebox<
+	typeof refererQueryString
+> = async (request, reply): Promise<void> => {
 	const { server: instance } = request;
 	const state = generateState();
 	const codeVerifier = generateCodeVerifier();
@@ -42,24 +44,23 @@ export const authGoogle: RouteHandlerMethodTypebox<typeof refererQueryString> = 
 		secure: instance.config.NODE_ENV === "production",
 		maxAge: 60 * 10, // 10 minutes
 		path: "/",
-	}
+	};
 
 	reply.cookie("google_oauth_state", state, cookieOptions);
 	reply.cookie("code_verifier", codeVerifier, cookieOptions);
 
-	const { referer } = request.query
+	const { referer } = request.query;
 	if (!referer) {
 		return reply.badRequest("Missing referer search param");
 	}
 	reply.cookie("referer", referer, cookieOptions);
 
- 	return reply.redirect(url.toString());
+	return reply.redirect(url.toString());
 };
 
-export const authGoogleCallback: RouteHandlerMethodTypebox<typeof stateAndCodeQueryString> = async (
-	request,
-	reply
-): Promise<void> => {
+export const authGoogleCallback: RouteHandlerMethodTypebox<
+	typeof stateAndCodeQueryString
+> = async (request, reply): Promise<void> => {
 	const { server: instance } = request;
 	const requestCookies = request.headers.cookie ?? "";
 	const cookies = parseCookies(requestCookies);
@@ -68,7 +69,7 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<typeof stateAndCodeQu
 	const referer = cookies.get("referer") ?? null;
 
 	// verify state
-	const {state, code} = request.query
+	const { state, code } = request.query;
 	if (
 		!state ||
 		!stateCookie ||
@@ -100,9 +101,9 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<typeof stateAndCodeQu
 			(await googleUserResponse.body.json()) as GoogleUserInfoResponse;
 		const googleUser: User = {
 			id: "",
-			'google_id': googleUserInfoResponse.sub,
-			'google_email': googleUserInfoResponse.email,
-			'google_name': googleUserInfoResponse.name,
+			google_id: googleUserInfoResponse.sub,
+			google_email: googleUserInfoResponse.email,
+			google_name: googleUserInfoResponse.name,
 		};
 
 		const existingUser = (await instance.database
@@ -137,9 +138,9 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<typeof stateAndCodeQu
 			.insertInto("user")
 			.values({
 				id: googleUser.id,
-				'google_id': googleUser.google_id,
-				'google_email': googleUser.google_email,
-				'google_name': googleUser.google_name,
+				google_id: googleUser.google_id,
+				google_email: googleUser.google_email,
+				google_name: googleUser.google_name,
 			})
 			.execute();
 
@@ -161,11 +162,13 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<typeof stateAndCodeQu
 	}
 };
 
-export const logout: RouteHandlerMethodTypebox<typeof refererQueryString> = async (request, reply) => {
+export const logout: RouteHandlerMethodTypebox<
+	typeof refererQueryString
+> = async (request, reply) => {
 	const { server: instance } = request;
 	const { auth_session: sessionId } = request.cookies;
 
-	const {referer} = request.query
+	const { referer } = request.query;
 	if (!referer) {
 		return reply.badRequest("Missing referer search param");
 	}
