@@ -27,5 +27,5 @@ const cache: FastifyPluginAsyncTypebox = async (
 };
 
 export default fp(cache, {
-	name: "cookie",
+	name: "cache",
 });
