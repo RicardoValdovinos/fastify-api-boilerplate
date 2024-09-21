@@ -53,27 +53,27 @@ export type FastifyReplyTypebox<TSchema extends FastifySchema> = FastifyReply<
 
 export interface Person {
   address: string | null;
-  date_added: string;
+  dateAdded: string;
   email: string;
-  first_name: string;
+  firstName: string;
   id: number;
-  last_name: string;
+  lastName: string;
   phone: string | null;
 }
 
 export interface Pet {
   age: number | null;
-  date_added: string;
+  dateAdded: string;
   id: number;
   name: string;
-  person_id: number;
-  species_id: number;
+  personId: number;
+  speciesId: number;
 }
 
 export interface Session {
-  expires_at: number;
+  expiresAt: number;
   id: string;
-  user_id: string;
+  userId: string;
 }
 
 export interface Species {
@@ -83,8 +83,8 @@ export interface Species {
 
 export interface User {
   google_email: string | null;
-  google_id: string | null;
-  google_name: string | null;
+  googleId: string | null;
+  googleName: string | null;
   id: string | null;
 }
 
