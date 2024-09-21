@@ -9,12 +9,12 @@ const personSchema = Type.Object({
 	id: Type.Number(),
 	lastName: Type.String(),
 	phone: Type.Union([Type.String(), Type.Null()]),
-})
+});
 
 const speciesSchema = Type.Object({
 	id: Type.Number(),
 	name: Type.String(),
-})
+});
 
 const petsSchema = Type.Object({
 	dateAdded: Type.String(),
@@ -23,13 +23,11 @@ const petsSchema = Type.Object({
 	name: Type.String(),
 	personId: Type.Number(),
 	speciesId: Type.Number(),
-})
+});
 
 export const getPersonsSchema = {
 	response: {
-		"2xx": Type.Array(
-			personSchema
-		),
+		"2xx": Type.Array(personSchema),
 	},
 } satisfies FastifySchema;
 
@@ -44,9 +42,7 @@ export const getPersonByIdSchema = {
 
 export const getSpeciesSchema = {
 	response: {
-		"2xx": Type.Array(
-			speciesSchema
-		),
+		"2xx": Type.Array(speciesSchema),
 	},
 } satisfies FastifySchema;
 
@@ -61,9 +57,7 @@ export const getSpeciesByIdSchema = {
 
 export const getPetsSchema = {
 	response: {
-		"2xx": Type.Array(
-			petsSchema
-		),
+		"2xx": Type.Array(petsSchema),
 	},
 } satisfies FastifySchema;
 
@@ -73,7 +67,7 @@ export const getPetsByIdSchema = {
 	}),
 	response: {
 		"2xx": Type.Object({
-			petsSchema
+			petsSchema,
 		}),
 	},
 } satisfies FastifySchema;
@@ -83,9 +77,7 @@ export const getPetsByPersonSchema = {
 		id: Type.Number(),
 	}),
 	response: {
-		"2xx": Type.Array(
-			petsSchema
-		),
+		"2xx": Type.Array(petsSchema),
 	},
 } satisfies FastifySchema;
 
@@ -94,9 +86,7 @@ export const getPetsBySpeciesSchema = {
 		id: Type.Number(),
 	}),
 	response: {
-		"2xx": Type.Array(
-			petsSchema
-		),
+		"2xx": Type.Array(petsSchema),
 	},
 } satisfies FastifySchema;
 
