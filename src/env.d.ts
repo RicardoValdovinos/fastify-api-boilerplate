@@ -3,6 +3,7 @@ import type { envSchemaType } from "./configs/env.ts";
 import type { lucia } from "./configs/authentication.ts";
 import type { Google } from "arctic";
 import type { DB } from "./common/types.ts";
+import type dayjs from "dayjs";
 
 type Auth = {
 	lucia: typeof lucia;
@@ -15,6 +16,7 @@ declare module "fastify" {
 		database: Kysely<DB>;
 		sql: Sql;
 		auth: Auth;
+		dayjs: typeof dayjs;
 	}
 }
 
