@@ -1,12 +1,12 @@
-import Swagger, { type SwaggerOptions } from "@fastify/swagger";
-import SwaggerUI from "@fastify/swagger-ui";
+import FastifySwagger, { type SwaggerOptions } from "@fastify/swagger";
+import FastifySwaggerUI from "@fastify/swagger-ui";
 import type { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
 
 /**
  * https://github.com/fastify/fastify-swagger
  */
-const swaggerGenerator: FastifyPluginAsync = async (
+const swagger: FastifyPluginAsync = async (
 	instance: FastifyInstance
 ): Promise<void> => {
 	const swaggerOptions: SwaggerOptions = {
@@ -28,16 +28,16 @@ const swaggerGenerator: FastifyPluginAsync = async (
 		},
 	};
 
-	await instance.register(Swagger, swaggerOptions);
+	await instance.register(FastifySwagger, swaggerOptions);
 
 	if (instance.config.NODE_ENV !== "production") {
-		await instance.register(SwaggerUI, {
+		await instance.register(FastifySwaggerUI, {
 			routePrefix: "/api/documentation",
 		});
 	}
 };
 
-export default fp(swaggerGenerator, {
-	name: "swaggerGenerator",
+export default fp(swagger, {
+	name: "swagger",
 	dependencies: ["env"],
 });

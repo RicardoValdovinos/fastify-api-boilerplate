@@ -19,6 +19,6 @@ const developmentDebug: FastifyPluginAsyncTypebox = async (
 };
 
 export default fp(developmentDebug, {
-	name: "developmentDebug",
+	name: "development-debug",
 	dependencies: ["env"],
 });

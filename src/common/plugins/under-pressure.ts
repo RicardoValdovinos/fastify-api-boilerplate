@@ -30,6 +30,5 @@ const underPressure: FastifyPluginAsyncTypebox = async (
 };
 
 export default fp(underPressure, {
-	name: "cors",
-	dependencies: ["env"],
+	name: "under-pressure",
 });

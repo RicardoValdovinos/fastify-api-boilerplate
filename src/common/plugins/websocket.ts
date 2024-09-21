@@ -17,6 +17,7 @@ const websocket: FastifyPluginAsyncTypebox = async (
 		handleProtocols: undefined,
 		host: undefined,
 		maxPayload: 104857600,
+		// noServer: false, // not supported use ws library directly
 		perMessageDeflate: true,
 		// port: undefined, // One and only one of the "port", "server", or "noServer" options must be specified
 		// server: undefined, // One and only one of the "port", "server", or "noServer" options must be specified
@@ -35,6 +36,5 @@ const websocket: FastifyPluginAsyncTypebox = async (
 };
 
 export default fp(websocket, {
-	name: "rate-limit",
-	dependencies: ["env"],
+	name: "websocket",
 });

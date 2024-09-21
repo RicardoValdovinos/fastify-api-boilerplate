@@ -21,5 +21,4 @@ const formBody: FastifyPluginAsyncTypebox = async (
 
 export default fp(formBody, {
 	name: "rate-limit",
-	dependencies: ["env"],
 });

@@ -32,6 +32,5 @@ const multipart: FastifyPluginAsyncTypebox = async (
 };
 
 export default fp(multipart, {
-	name: "rate-limit",
-	dependencies: ["env"],
+	name: "multipart",
 });

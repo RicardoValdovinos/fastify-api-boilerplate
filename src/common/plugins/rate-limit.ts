@@ -44,5 +44,4 @@ const rateLimit: FastifyPluginAsyncTypebox = async (
 
 export default fp(rateLimit, {
 	name: "rate-limit",
-	dependencies: ["env"],
 });
