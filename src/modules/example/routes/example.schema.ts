@@ -66,9 +66,7 @@ export const getPetsByIdSchema = {
 		id: Type.Number(),
 	}),
 	response: {
-		"2xx": Type.Object({
-			petsSchema,
-		}),
+		"2xx": petsSchema,
 	},
 } satisfies FastifySchema;
 
