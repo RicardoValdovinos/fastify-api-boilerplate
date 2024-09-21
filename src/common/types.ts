@@ -82,7 +82,7 @@ export interface Species {
 }
 
 export interface User {
-	google_email: string | null;
+	googleEmail: string | null;
 	googleId: string | null;
 	googleName: string | null;
 	id: string | null;

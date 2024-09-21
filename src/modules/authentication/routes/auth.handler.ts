@@ -10,10 +10,11 @@ import { parseCookies } from "oslo/cookie";
 import { request as undiciRequest } from "undici";
 import type { RouteHandlerMethodTypebox, User } from "../../../common/types.js";
 import type {
-	refererQueryString,
-	stateAndCodeQueryString,
+	refererQueryStringSchema,
+	stateAndCodeQueryStringSchema,
 } from "./auth.schema.js";
 
+// response from google api
 type GoogleUserInfoResponse = {
 	sub: string;
 	name: string;
@@ -26,7 +27,7 @@ type GoogleUserInfoResponse = {
 };
 
 export const authGoogle: RouteHandlerMethodTypebox<
-	typeof refererQueryString
+	typeof refererQueryStringSchema
 > = async (request, reply): Promise<void> => {
 	const { server: instance } = request;
 	const state = generateState();
@@ -59,7 +60,7 @@ export const authGoogle: RouteHandlerMethodTypebox<
 };
 
 export const authGoogleCallback: RouteHandlerMethodTypebox<
-	typeof stateAndCodeQueryString
+	typeof stateAndCodeQueryStringSchema
 > = async (request, reply): Promise<void> => {
 	const { server: instance } = request;
 	const requestCookies = request.headers.cookie ?? "";
@@ -101,22 +102,22 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<
 			(await googleUserResponse.body.json()) as GoogleUserInfoResponse;
 		const googleUser: User = {
 			id: "",
-			google_id: googleUserInfoResponse.sub,
-			google_email: googleUserInfoResponse.email,
-			google_name: googleUserInfoResponse.name,
+			googleId: googleUserInfoResponse.sub,
+			googleEmail: googleUserInfoResponse.email,
+			googleName: googleUserInfoResponse.name,
 		};
 
-		const existingUser = (await instance.database
+		const existingUser = await instance.database
 			.selectFrom("user")
-			.where("google_id", "=", googleUser.google_id)
+			.where("googleId", "=", googleUser.googleId)
 			.selectAll()
-			.executeTakeFirst()) as User;
+			.executeTakeFirst();
 
 		reply.clearCookie("google_oauth_state");
 		reply.clearCookie("code_verifier");
 		reply.clearCookie("referer");
 
-		if (existingUser) {
+		if (existingUser && existingUser.id) {
 			const session = await instance.auth.lucia.createSession(
 				existingUser.id,
 				{}
@@ -138,9 +139,9 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<
 			.insertInto("user")
 			.values({
 				id: googleUser.id,
-				google_id: googleUser.google_id,
-				google_email: googleUser.google_email,
-				google_name: googleUser.google_name,
+				googleId: googleUser.googleId,
+				googleEmail: googleUser.googleEmail,
+				googleName: googleUser.googleName,
 			})
 			.execute();
 
@@ -163,7 +164,7 @@ export const authGoogleCallback: RouteHandlerMethodTypebox<
 };
 
 export const logout: RouteHandlerMethodTypebox<
-	typeof refererQueryString
+	typeof refererQueryStringSchema
 > = async (request, reply) => {
 	const { server: instance } = request;
 	const { auth_session: sessionId } = request.cookies;
