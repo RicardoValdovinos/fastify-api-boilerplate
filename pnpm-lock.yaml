@@ -114,6 +114,9 @@ importers:
       '@eslint/js':
         specifier: ^9.11.0
         version: 9.11.0
+      '@total-typescript/ts-reset':
+        specifier: ^0.6.1
+        version: 0.6.1
       '@types/better-sqlite3':
         specifier: ^7.6.11
         version: 7.6.11
@@ -1013,6 +1016,9 @@ packages:
 
   '@sinclair/typebox@0.33.12':
     resolution: {integrity: sha512-d5KrXIdPolLp8VpGpZAQvEz8ioVtFlUQSyCIS2sEBi7FKhceIB7nj9BlNfqqvp5wmOfg8v8bP1rAvYYkjz21/Q==}
+
+  '@total-typescript/ts-reset@0.6.1':
+    resolution: {integrity: sha512-cka47fVSo6lfQDIATYqb/vO1nvFfbPw7uWLayIXIhGETj0wcOOlrlkobOMDNQOFr9QOafegUPq13V2+6vtD7yg==}
 
   '@tybys/wasm-util@0.8.3':
     resolution: {integrity: sha512-Z96T/L6dUFFxgFJ+pQtkPpne9q7i6kIPYCFnQBHSgSPV9idTsKfIhCss0h5iM9irweZCatkrdeP8yi5uM1eX6Q==}
@@ -4177,6 +4183,8 @@ snapshots:
     optional: true
 
   '@sinclair/typebox@0.33.12': {}
+
+  '@total-typescript/ts-reset@0.6.1': {}
 
   '@tybys/wasm-util@0.8.3':
     dependencies:

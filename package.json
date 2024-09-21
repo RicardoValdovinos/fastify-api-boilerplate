@@ -61,6 +61,7 @@
 		"@commitlint/config-conventional": "^19.5.0",
 		"@eslint/compat": "^1.1.1",
 		"@eslint/js": "^9.11.0",
+		"@total-typescript/ts-reset": "^0.6.1",
 		"@types/better-sqlite3": "^7.6.11",
 		"@types/eslint__js": "^8.42.3",
 		"@types/node": "^22.5.5",
