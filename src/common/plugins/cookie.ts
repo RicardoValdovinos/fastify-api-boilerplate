@@ -3,10 +3,12 @@ import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
+/**
+ * https://github.com/fastify/fastify-cookie
+ */
 const cookie: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {
-	// https://github.com/fastify/fastify-cookie
 	const defaultCookieSerializeOptions: CookieSerializeOptions = {
 
 	}
@@ -14,7 +16,7 @@ const cookie: FastifyPluginAsyncTypebox = async (
 	const defaultCookieOptions: FastifyCookieOptions = {
 		secret: undefined,
 		hook: "onRequest",
-		algorithm: undefined,
+		algorithm: "sha256",
 		parseOptions: defaultCookieSerializeOptions
 	}
 	

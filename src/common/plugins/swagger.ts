@@ -3,10 +3,12 @@ import SwaggerUI from "@fastify/swagger-ui";
 import type { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
 
+/**
+ * https://github.com/fastify/fastify-swagger
+ */
 const swaggerGenerator: FastifyPluginAsync = async (
 	instance: FastifyInstance
-) => {
-	// https://github.com/fastify/fastify-swagger
+): Promise<void> => {
 	const swaggerOptions: SwaggerOptions = {
 		swagger: {
 			info: {

@@ -4,6 +4,10 @@ import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 import { lucia } from "../../configs/authentication.js";
 
+/**
+ * https://github.com/lucia-auth/lucia
+ * https://github.com/pilcrowonpaper/arctic
+ */
 const authentication: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {

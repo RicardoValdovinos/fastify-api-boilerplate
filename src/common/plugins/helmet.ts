@@ -2,11 +2,13 @@ import Helmet, { type FastifyHelmetOptions } from "@fastify/helmet";
 import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
-
+/**
+ * https://github.com/fastify/fastify-helmet
+ * https://helmetjs.github.io/ 
+ */
 const helmet: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {
-	// https://github.com/fastify/fastify-helmet + https://helmetjs.github.io/
 	const defaultHelmetOptions: FastifyHelmetOptions = {
 		contentSecurityPolicy: {
 			directives: {

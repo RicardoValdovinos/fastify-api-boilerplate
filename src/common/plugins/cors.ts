@@ -3,10 +3,12 @@ import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
 import type { FastifyInstance } from "fastify";
 import fp from "fastify-plugin";
 
+/**
+ * https://github.com/fastify/fastify-cors 
+ */
 const cors: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {
-	// https://github.com/fastify/fastify-cors
 	const defaultCorsOptions: FastifyCorsOptions = {
 		origin: instance.config.ALLOWED_ORIGINS.split(" "),
 		methods: ["GET","HEAD","PUT","PATCH","POST","DELETE"],

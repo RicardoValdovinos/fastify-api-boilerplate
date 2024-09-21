@@ -1,13 +1,14 @@
-import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
-import type { FastifyInstance, FastifyPluginOptions } from "fastify";
-import fp from "fastify-plugin";
 import FastifyRateLimit, { type RateLimitPluginOptions } from "@fastify/rate-limit";
+import type { FastifyPluginAsyncTypebox } from "@fastify/type-provider-typebox";
+import type { FastifyInstance } from "fastify";
+import fp from "fastify-plugin";
 
+/**
+ * https://github.com/fastify/fastify-rate-limit
+ */
 const rateLimit: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance,
-	_options: FastifyPluginOptions
 ): Promise<void> => {
-  // https://github.com/fastify/fastify-rate-limit
   const defaultRateLimitOptions: RateLimitPluginOptions ={
     global : true,
     max: 1000,
