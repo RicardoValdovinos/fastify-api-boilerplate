@@ -5,7 +5,7 @@ import fp from "fastify-plugin";
 /**
  * Plugins that should only run during development should be registered here
  */
-const developmentDebug: FastifyPluginAsyncTypebox = async (
+const developmentOnly: FastifyPluginAsyncTypebox = async (
 	instance: FastifyInstance
 ): Promise<void> => {
 	const environment = instance.config.NODE_ENV.toLowerCase();
@@ -18,7 +18,7 @@ const developmentDebug: FastifyPluginAsyncTypebox = async (
 	});
 };
 
-export default fp(developmentDebug, {
-	name: "development-debug",
+export default fp(developmentOnly, {
+	name: "development-only",
 	dependencies: ["env"],
 });
