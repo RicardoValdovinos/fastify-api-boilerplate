@@ -256,13 +256,13 @@ A simplified list can be found in the [Overview](#overview) section.
 
 - [TypeBox](https://github.com/sinclairzx81/typebox)
 
-## Database
+### Database
 
 - [Kysely](https://kysely.dev)
 - [kysely-codegen](https://github.com/RobinBlomberg/kysely-codegen)
 - [better-sqlite3](https://github.com/WiseLibs/better-sqlite3)
 
-## Authentication
+### Authentication
 
 - [Lucia](https://lucia-auth.com)
 - [@lucia-auth/adapter-sqlite](https://lucia-auth.com/database/sqlite)
