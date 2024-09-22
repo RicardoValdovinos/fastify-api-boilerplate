@@ -1,9 +1,9 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
-  test: {
-    coverage: {
-      provider: 'istanbul' // or 'v8'
-    },
-  },
-})
+	test: {
+		coverage: {
+			provider: "v8", // or 'v8'
+		},
+	},
+});
