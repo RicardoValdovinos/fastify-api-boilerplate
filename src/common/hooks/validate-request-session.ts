@@ -1,5 +1,8 @@
 import type { preHandlerAsyncHookHandler } from "fastify";
 
+/**
+ * add this preHandler request hook to any modules you want to have session validation
+ */
 export const validateRequestSession: preHandlerAsyncHookHandler = async (
 	request,
 	reply
