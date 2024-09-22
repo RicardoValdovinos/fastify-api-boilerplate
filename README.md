@@ -117,7 +117,7 @@ If you wish to remove any hooks, simply delete the corresponding file in the .hu
 
 ## Important Note
 
-1. This boilerplate project includes a basic example module to demonstrate the [recommended module organizational structure](src/modules/README.md). The module itself is self contained (thanks to [Fastify's Encapsulation](https://fastify.dev/docs/latest/Reference/Encapsulation/)), meaning it can be modified or deleted without worry. To help with overall project understanding, README files have been included in relevant folders containing simple descriptions about how the different directories in the accompanying directory structure may be used. These README files can be found in the following directories:
+This boilerplate project includes a basic example module to demonstrate the [recommended module organizational structure](src/modules/README.md). The module itself is self contained (thanks to [Fastify's Encapsulation](https://fastify.dev/docs/latest/Reference/Encapsulation/)), meaning it can be modified or deleted without worry. To help with overall project understanding, README files have been included in relevant folders containing simple descriptions about how the different directories in the accompanying directory structure may be used. These README files can be found in the following directories:
    - [src/common](src/common/README.md)
    - [src/configs](src/configs/README.md)
    - [src/modules](src/modules/README.md)
